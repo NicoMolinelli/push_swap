@@ -1,4 +1,5 @@
 #include <stack.h>
+#include <stdio.h>
 
 t_stack*	create_stack(int items)
 {
@@ -19,8 +20,12 @@ t_stack*	create_stack(int items)
 	return (stack);
 }
 
-// TODO
-// void	free_stack(t_stack8 stack)
+void	free_stack(t_stack* stack)
+{
+	if (stack->list)
+		free(stack->list);
+	free(stack);
+}
 
 // important
 void	print_stack(t_stack* stack)
@@ -30,7 +35,8 @@ void	print_stack(t_stack* stack)
 	i = stack->start;
 	while (i < stack->items + stack->start)
 	{
-		printf("%d\n", stack->list[i % stack->items]);
+		if (stack->list[i % stack->items])
+			printf("%d\n", stack->list[i % stack->items]);
 		i++;
 	}
 }

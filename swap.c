@@ -1,23 +1,29 @@
-void	swap_a(int* stack_a)
+#include <stack.h>
+
+static void	swap(t_stack* stack)
 {
 	int	temp;
 
-	temp = stack_a[0];
-	stack_a[0] = stack_a[1];
-	stack_a[1] = temp;
+	if (stack->list[0] && stack->list[1])
+	{
+		temp = stack->list[0];
+		stack->list[0] = stack->list[1];
+		stack->list[1] = temp;
+	}
 }
 
-void	swap_b(int* stack_b)
+void	sa(t_stack* stack_a)
 {
-	int	temp;
-
-	temp = stack_b[0];
-	stack_b[0] = stack_b[1];
-	stack_b[1] = temp;
+	swap(stack_a);
 }
 
-void	swap_s(int* stack_a, int* stack_b)
+void	sb(t_stack* stack_b)
 {
-	swap_a(stack_a);
-	swap_b(stack_b);
+	swap(stack_b);
+}
+
+void	ss(t_stack* stack_a, t_stack* stack_b)
+{
+	swap(stack_a);
+	swap(stack_b);
 }

@@ -13,5 +13,6 @@ typedef struct s_stack
 
 t_stack*	create_stack(int items);
 void	print_stack(t_stack* stack);
+void	free_stack(t_stack* stack);
 
 #endif

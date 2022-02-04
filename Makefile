@@ -6,7 +6,7 @@ CC		=	gcc
 
 FLAGS	=	-Wall -Werror -Wextra
 
-SRCS	=	sub.c stack.c
+SRCS	=	main.c stack.c validation.c swap.c
 
 H_PATH	=	includes
 
