@@ -3,12 +3,16 @@
 static void	swap(t_stack* stack)
 {
 	int	temp;
+	int	i;
+	size_t	len;
 
-	if (stack->list[0] && stack->list[1])
+	i = stack->start;
+	len = stack->items;
+	if (stack->list[i % len] && stack->list[(i + 1) % len])
 	{
-		temp = stack->list[0];
-		stack->list[0] = stack->list[1];
-		stack->list[1] = temp;
+		temp = stack->list[i % len];
+		stack->list[i % len] = stack->list[(i + 1) % len];
+		stack->list[(i + 1) % len] = temp;
 	}
 }
 

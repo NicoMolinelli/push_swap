@@ -36,9 +36,11 @@ int	main(int argc, char **argv)
 	if (!stack_b)
 		return (0);
 
+	ft_bzero(stack_b->list, sizeof(int) * (argc - 1));
+
 	// save numbers in stack_a
 	store_data(stack_a, argv);
-	print_stack(stack_a);
+	// print_stack(stack_a);
 	
 	// printf("test\n");
 	// if (stack_a->list[1])
@@ -49,8 +51,59 @@ int	main(int argc, char **argv)
 	// print_stack(stack_a);
 
 	// SWAP TEST
+	// ft_bzero(&stack_a->list[0], sizeof(int));
+	// stack_a->start = (stack_a->items - 1) * 5;
+	// printf("swap last and first\n");
 	// sa(stack_a);
 	// print_stack(stack_a);
+
+	// ROTATE TEST
+	// rotate(stack_a, 1);
+	// printf("rotate reverse\n");
+	// print_stack(stack_a);
+	// rotate(stack_a, 0);
+	// printf("rotate\n");
+	// print_stack(stack_a);
+	// rotate(stack_a, 0);
+	// printf("rotate \n");
+	// print_stack(stack_a);
+
+	// PUSH TEST
+	// push(stack_b, stack_a);
+	// printf("pushed into stack b\n");
+	// print_stack(stack_b);
+	// printf("stack a\n");
+	// print_stack(stack_a);
+
+	// push(stack_b, stack_a);
+	// printf("pushed into stack b\n");
+	// print_stack(stack_b);
+	// printf("stack a\n");
+	// print_stack(stack_a);
+
+	// push(stack_a, stack_b);
+	// printf("pushed into stack a\n");
+	// print_stack(stack_a);
+	// printf("stack b\n");
+	// print_stack(stack_b);
+
+	// push(stack_b, stack_a);
+	// printf("pushed into stack b\n");
+	// print_stack(stack_b);
+	// printf("stack a\n");
+	// print_stack(stack_a);
+
+	// push(stack_a, stack_b);
+	// printf("pushed into stack a\n");
+	// print_stack(stack_a);
+	// printf("stack b\n");
+	// print_stack(stack_b);
+
+	// push(stack_a, stack_b);
+	// printf("pushed into stack a\n");
+	// print_stack(stack_a);
+	// printf("stack b\n");
+	// print_stack(stack_b);
 
 	// free stacks
 	free_stack(stack_a);

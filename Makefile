@@ -1,12 +1,12 @@
 NAME	=	push_swap
 
-LIBFT	= libft/libft.a
+LIBFT	=	libft/libft.a
 
 CC		=	gcc
 
 FLAGS	=	-Wall -Werror -Wextra
 
-SRCS	=	main.c stack.c validation.c swap.c
+SRCS	=	main.c stack.c validation.c swap.c rotate.c push.c
 
 H_PATH	=	includes
 
