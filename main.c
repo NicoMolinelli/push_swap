@@ -3,6 +3,7 @@
 #include <libft.h>
 #include <validate.h>
 #include <stack.h>
+#include <sort.h>
 #include <ops.h>
 #include <unistd.h>
 
@@ -40,7 +41,11 @@ int	main(int argc, char **argv)
 
 	// save numbers in stack_a
 	store_data(stack_a, argv);
-	// print_stack(stack_a);
+	select_sort(stack_a, stack_b);
+	printf("stack a:\n");
+	print_stack(stack_a);
+	printf("stack b:\n");
+	print_stack(stack_b);
 	
 	// printf("test\n");
 	// if (stack_a->list[1])

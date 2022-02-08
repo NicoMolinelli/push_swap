@@ -27,6 +27,26 @@ void	free_stack(t_stack* stack)
 	free(stack);
 }
 
+// consider overflow
+int	sval(t_stack* s, int offset)
+{
+	return (s->list[(s->start + offset) % s->items]);
+}
+
+int	sindex(t_stack* s, int value)
+{
+	size_t	index;
+
+	index = s->start;
+	while (index < s->items + s->start)
+	{
+		if (s->list[index % s->items] == value)
+			return (index % s->items);
+		index++;
+	}
+	return (-1);
+}
+
 // important
 void	print_stack(t_stack* stack)
 {
