@@ -8,55 +8,56 @@ t_stack*	create_stack(int items)
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (0);
-	stack->list = malloc(sizeof(int) * items);
-	if (!stack->list)
-	{
-		free(stack);
-		return (0);
-	}
 	stack->items = items;
 	stack->start = 0;
-	stack->end = items - 1;
+	stack->end = 0;
 	return (stack);
 }
 
-void	free_stack(t_stack* stack)
+t_node	*create_node(int value)
 {
-	if (stack->list)
-		free(stack->list);
-	free(stack);
+	t_node	*new;
+
+	new = malloc(sizeof(t_node));
+	if (!new)
+		return (0);
+	new->value = value;
+	new->prev = 0;
+	new->next = 0;
+	return (new);
 }
 
-// consider overflow
-int	sval(t_stack* s, int offset)
+t_stack*	st_add_node(t_node* n, t_stack* st)
 {
-	return (s->list[(s->start + offset) % s->items]);
+	t_node*	end;
+
+	if (!n)
+		return (0);
+	end = st->end;
+	if (!end)
+		st->start = n;
+	else
+		end->next = n;
+	st->end = n;
+	return (st);
 }
 
-int	sindex(t_stack* s, int value)
+//TODO
+t_stack*	st_free(t_stack* s)
 {
-	size_t	index;
+	// todo free all stack
+	free(s);
+	return (0);
+}
 
-	index = s->start;
-	while (index < s->items + s->start)
+void	st_print(t_stack* s)
+{
+	t_node* i;
+
+	i = s->start;
+	while (i)
 	{
-		if (s->list[index % s->items] == value)
-			return (index % s->items);
-		index++;
-	}
-	return (-1);
-}
-
-// important
-void	print_stack(t_stack* stack)
-{
-	size_t	i;
-
-	i = stack->start;
-	while (i < stack->items + stack->start)
-	{
-		if (stack->list[i % stack->items])
-			printf("%d\n", stack->list[i % stack->items]);
-		i++;
+		printf("%d\n", i->value);
+		i = i->next;
 	}
 }
