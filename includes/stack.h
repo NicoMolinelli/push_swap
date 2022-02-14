@@ -21,8 +21,9 @@ typedef struct s_stack
 
 t_stack*	create_stack(int items);
 t_node		*create_node(int value);
-t_stack*	st_add_node(t_node* n, t_stack* st);
+t_stack*	st_append(t_node* n, t_stack* st);
 t_stack*	st_free(t_stack* s);
 void		st_print(t_stack* s);
+void		st_rev_print(t_stack* s);
 
 #endif

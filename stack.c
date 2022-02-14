@@ -27,7 +27,7 @@ t_node	*create_node(int value)
 	return (new);
 }
 
-t_stack*	st_add_node(t_node* n, t_stack* st)
+t_stack*	st_append(t_node* n, t_stack* st)
 {
 	t_node*	end;
 
@@ -38,7 +38,24 @@ t_stack*	st_add_node(t_node* n, t_stack* st)
 		st->start = n;
 	else
 		end->next = n;
+	n->prev = st->end;
 	st->end = n;
+	return (st);
+}
+
+t_stack*	st_prepend(t_node* n, t_stack* st)
+{
+	t_node*	start;
+
+	if (!n)
+		return (0);
+	start = st->start;
+	if (!start)
+		st->start = n;
+	else
+		start->prev = n;
+	n->next = st->start;
+	st->start = n;
 	return (st);
 }
 
@@ -59,5 +76,17 @@ void	st_print(t_stack* s)
 	{
 		printf("%d\n", i->value);
 		i = i->next;
+	}
+}
+
+void	st_rev_print(t_stack* s)
+{
+	t_node* i;
+
+	i = s->end;
+	while (i)
+	{
+		printf("%d\n", i->value);
+		i = i->prev;
 	}
 }

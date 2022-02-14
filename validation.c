@@ -5,22 +5,19 @@ static int	ft_issign(int c)
 	return (c == '-' || c == '+');
 }
 
-int	valid_input(char **argv)
+// add in libft as upper func
+int	valid_input(char *str)
 {
 	int	i;
-	int	y;
 
 	i = 0;
-	while (argv[i])
+	if (!str)
+		return (0);
+	while (str[i])
 	{
-		y = 0;
-		while (argv[i][y])
-		{
-			if (!ft_isdigit(argv[i][y]) && !ft_issign(argv[i][y]))
-				return (0);
-			y++;
-		}
-	i++;
+		if (!ft_isdigit(str[i]) && !ft_issign(str[i]))
+			return (0);
+		i++;
 	}
 	return (1);
 }
