@@ -1,63 +1,66 @@
 #include <stack.h>
+#include <actions.h>
 #include <stdio.h>
-#include <ops.h>
 
-// fast way to put the value in "index" position as first element in stack s
-void	smart_top(t_stack* s, int index)
+// fast way to put the node with value n as first element in stack st
+void	smart_top(t_stack* st, int n)
 {
+	int	len;
+	int	index;
+
+	len = st_len(st);
+	index = st_index(n, st);
 	// normal rotate
-	if ((index % s->items) < s->items / 2)
+	if (index <= len / 2)
 	{
-		while ((index % s->items) != (s->start % s->items))
+		while (index)
 		{
-			rotate(s, 0);
+			index--;
+			ra(st);//TODO handle name
 		}
 	}
 	else//reverse rotate
 	{
-		while ((index % s->items) != (s->start % s->items))
+		while (index < len)
 		{
-			rotate(s, 1);
+			rra(st);//TODO handle name
+			index++;
 		}
 	}
 }
 
-// find min value in stack and return the index
-int	min(t_stack* s)
+// find and return min value in stack
+int	min(t_stack* st)
 {
+	t_node*	i;
 	int		min;
-	size_t	i;
 
-	i = 1;
-	min = sval(s, 0);
-	while (s->list[(s->start + i) % s->items] && i < s->items)
+	if (!st->start)
+		return (-1);// stack is empty handle it
+	i = st->start->next;
+	min = st->start->value;
+	while (i)
 	{
-		if (min > sval(s, i))
-			min = sval(s, i);
-		i++;
+		if (min > i->value)
+			min = i->value;
+		i = i->next;
 	}
-	return (sindex(s, min));
+	return (min);
 }
 
 void	select_sort(t_stack* sa, t_stack* sb)
 {
-	int m;
-
-	while (sa->list[sa->start % sa->items])
+	int	m;
+	
+	while (sa->start)
 	{
-		// printf("val: %d\n", sa->list[sa->start % sa->items]);
-		// printf("sa di start: %zu\n", sa->start);
 		m = min(sa);
 		// printf("min: %d\n", m);
 		smart_top(sa, m);
-		push(sb, sa);
-		// printf("stack a\n");
-		// print_stack(sa);
-		// printf("stack b\n");
-		// print_stack(sb);
+		pb(sb, sa);
 	}
-	while (sb->list[sb->start % sb->items])
+	while (sb->start)
 	{
-		push(sa, sb);
+		pa(sa, sb);
 	}
 }

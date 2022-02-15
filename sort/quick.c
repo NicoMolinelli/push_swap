@@ -1,4 +1,4 @@
-void	quicksort(array, start, end)
+void	quicksort(t_stack* st, t_node* start, t_node* end)
 {
 	// choose a pivot
 	// partitioning -> all value < pivot to left and the > on the right
