@@ -4,7 +4,7 @@
 #include <libft.h>
 #include <unistd.h>
 
-int	valid_input(char *str);
+int	is_number(char *str);
 int	ft_error(void);
 
 #endif

@@ -6,7 +6,7 @@ static int	ft_issign(int c)
 }
 
 // add in libft as upper func
-int	valid_input(char *str)
+int	is_number(char *str)
 {
 	int	i;
 

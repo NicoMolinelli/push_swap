@@ -34,16 +34,19 @@ t_node	*create_node(int value)
 t_stack*	st_fill(char **argv, int items)
 {
 	t_stack*	s;
+	int			val;
 	
 	s = create_stack(items);
 	if (!s)
 		return (0);
 	while (*argv)
 	{
-		if (!valid_input(*argv))
+		val = ft_atoi(*argv);
+		if (!is_number(*argv) || st_index(val, s) >= 0)
 			return st_clear(s);
-		if (!st_append(create_node(ft_atoi(*argv++)), s))
+		if (!st_append(create_node(val), s))
 			return st_clear(s);
+		argv++;
 	}
 	return (s);
 }
