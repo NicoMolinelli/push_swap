@@ -44,5 +44,5 @@ void	sort(t_stack* sta, t_stack* stb, int length)
 	else if (length == 3)
 		sort_3(sta);
 	else
-		select_sort(sta, stb);
+		quicksort(sta, stb, length);
 }

@@ -1,6 +1,8 @@
 #ifndef ACTIONS_H
 # define ACTIONS_H
 
+#include <stack.h>
+
 void	sa(t_stack* stack_a);
 void	sb(t_stack* stack_b);
 void	ss(t_stack* stack_a, t_stack* stack_b);
