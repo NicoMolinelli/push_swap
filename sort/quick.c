@@ -78,10 +78,10 @@ void	quicksort(t_stack* st_a, t_stack* st_b, int length)
 	t_node* node;
 	int		i;
 
+	if (is_sorted(st_a, length))
+		return ;
 	// if (length == 2)
 	// 	return (sort_2(st_a, st_b));
-	if (length <= 1)// add is sorted function
-		return ;
 	// pivot = get_median(st_a, length);
 	// printf("median: %d\n", pivot);
 	pivot = st_a->start->value;
@@ -148,69 +148,6 @@ void	quicksort(t_stack* st_a, t_stack* st_b, int length)
 	}
 
 }
-
-// //  quicksort(int n)
-// //     if n == 1 return
-
-// //     int top_half_len = 0
-
-
-// // 	get the average number(if equal get the max)
-
-// 	// split list
-// 	i = 0;
-// 	left_part_count = 0;
-// 	while(i < n)
-// 	{
-// 		if (value < pivot)
-// 			push_b();
-// 		else
-// 		{
-// 			rotate_a();
-// 			left_part_count++;
-// 		}
-// 		i++;
-// 	}
-
-
-// 	//reverse the list back to original position
-// 	///// if left_part_count == current stack a length dont do anything
-// 	i = 0;
-// 	while (i < left_part_count)
-// 	{
-// 		reverse_rotate();
-// 		i++;
-// 	}
-	
-// 	// push back on top smaller half
-// 	while (st_b->start)
-// 	{
-// 		push_a();
-// 	}
-
-// 	//first recursion on the smaller half
-// 	quicksort(n - left_part_count);// bottom half name doesnt seem accurate
-
-// 	// put on top the right part
-// 	i = 0;
-// 	while (i < n - left_part_count)
-// 	{
-// 		rotate_a();
-// 		i++;
-// 	}
-	
-// 	//recursion for the right part
-// 	quicksort(n - left_part_count);
-
-// 	//rotate list back to original position
-// 	i = 0;
-// 	while (i < n - left_part_count)
-// 	{
-// 		rotate_a();
-// 		i++;
-// 	}
-// }
-
 
 // // suppose pivot is the median
 
