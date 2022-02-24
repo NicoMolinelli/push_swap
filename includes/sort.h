@@ -6,5 +6,8 @@
 void	sort(t_stack* sta, t_stack* stb, int length);
 void	select_sort(t_stack* sa, t_stack* sb);
 void	quicksort(t_stack* sa, t_stack* sb, int length);
+void	sort_2(t_stack* st);
+void	sort_3(t_stack* st);
+void	sort_4ab(t_stack* a, t_stack* b);
 
 #endif

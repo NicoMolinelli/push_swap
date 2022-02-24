@@ -2,50 +2,7 @@
 #include <stdio.h>
 #include <sort.h>
 
-// find and return min value in stack
-static int	get_min(t_stack* st, int length)
-{
-	t_node*	i;
-	int		min;
-	int		count;
-
-	if (!st->start)
-		return (-1);// stack is empty handle it
-	count = 0;
-	i = st->start->next;
-	min = st->start->value;
-	while (i && count < length)
-	{
-		if (min > i->value)
-			min = i->value;
-		i = i->next;
-		count++;
-	}
-	return (min);
-}
-
-// find and return min value in stack
-int	get_max(t_stack* st, int length)
-{
-	t_node*	i;
-	int		max;
-	int		count;
-
-	if (!st->start)
-		return (-1);// stack is empty handle it
-	count = 0;
-	i = st->start->next;
-	max = st->start->value;
-	while (i && count < length)
-	{
-		if (max < i->value)
-			max = i->value;
-		i = i->next;
-		count++;
-	}
-	return (max);
-}
-
+// TODO algorith to find it
 // get the average number in stack st(if equal get the max)
 int	get_median(t_stack* st, int length)
 {
@@ -53,8 +10,15 @@ int	get_median(t_stack* st, int length)
 	int	max;
 	int	 median;
 
-	min = get_min(st, length);
-	max = get_max(st, length);
+	min = st_min(st, length);
+	max = st_max(st, length);
+	// printf("min: %d\n", min);
+	// printf("max: %d\n", max);
+	if (length == 2)
+		return (max);
+	// if (st->start->value == min)//|| st->start->value == max caso in cui primo max e poi min sei spacciato!
+	// 	return (st->start->next->value);
+	// return (st->start->value);
 	median = -1;
 	while (max > min)
 	{
@@ -71,110 +35,121 @@ int	get_median(t_stack* st, int length)
 	}
 }
 
-void	quicksort(t_stack* st_a, t_stack* st_b, int length)
+static int	is_sorted(t_stack* st, int length)
 {
-	int		left_part_count;
-	int		pivot;
 	t_node* node;
+	t_node* next;
 	int		i;
 
-	if (is_sorted(st_a, length))
-		return ;
-	// if (length == 2)
-	// 	return (sort_2(st_a, st_b));
-	// pivot = get_median(st_a, length);
-	// printf("median: %d\n", pivot);
-	pivot = st_a->start->value;
-	// split list (partition)
+	if (length <= 1)
+		return (1);
+	node = st->start;
+	next = node->next;
+	i = 1;
+	while (i < length && next)
+	{
+		if (node->value > next->value)
+			return (0);
+		node = next;
+		next = node->next;
+		i++;
+	}
+	if (i == length)
+		return (1);
+	return (0);
+}
+
+// get the pivot -> move all the el less then the pivot to stb
+void	partition(t_stack* st_a, t_stack* st_b, int length)
+{
+	t_node* node;
+	int		pivot;
+	int		i;
+
+	// printf("length: %d\n", length);
+	pivot = get_median(st_a, length);
+	// printf("pivot/median: %d\n", pivot);
 	i = 0;
-	left_part_count = 0;
 	node = st_a->start;
 	while(i < length)
 	{
 		if (node->value < pivot)
 			pb(st_b, st_a);
 		else
-		{
 			ra(st_a);
-			left_part_count++;
-		}
 		node = st_a->start;
 		i++;
 	}
+	// st_print(st_a);
+	// st_print(st_b);
+}
 
-	printf("length: %d\n", length);
+void	quicksort(t_stack* st_a, t_stack* st_b, int length)
+{
+	int		minor_than_pivot_count;
+	int		i;
+
+	// if (is_sorted(st_a, length))
+	// 	return ;
+	if (is_sorted(st_a, length))
+		return ;
+	if (length == 2)
+	{
+		sort_2(st_a);
+		return ;
+	}
+	else if (length == 3)
+	{
+		sort_3(st_a);
+		return ;
+	}
+	// split list (partition)
+	partition(st_a, st_b, length);
+	minor_than_pivot_count = st_len(st_b);
 
 	//reverse the list back to original position
-	if (left_part_count != st_len(st_a))
-	{
 		i = 0;
-		while (i < left_part_count)// optimize the rotation!
+	if (st_len(st_a) != (length - minor_than_pivot_count))
+	{
+		while (i < (length - minor_than_pivot_count))// optimize the rotation!
 		{
 			rra(st_a);
 			i++;
 		}
 	}
-	
 	// push back on top smaller half
 	while (st_b->start)
 	{
 		pa(st_a, st_b);
 	}
 
-	printf("asf %d\n", length - left_part_count);
+	// printf("Before leftR: length=>%d left->%d right->%d\n", length, top, bottom);
 	//first recursion on the smaller half
-	quicksort(st_a, st_b, left_part_count);
-
+	quicksort(st_a, st_b, minor_than_pivot_count);
+	
+	// printf("After leftR: length=>%d left->%d right->%d\n", length, top, bottom);
 	// // put on top the right part
-	if (length != st_len(st_a))
-	{
+	// if (length != st_len(st_a))
+	// {
 		i = 0;
-		while (i < length)
+		while (i < minor_than_pivot_count)// optimize the rotation!
 		{
 			ra(st_a);
 			i++;
 		}
-	}
+	// }
 	
+	// printf("Before rightR: length=>%d left->%d right->%d\n", length, top, bottom);
 	// //recursion for the right part
-	quicksort(st_a, st_b, length - left_part_count);
+	quicksort(st_a, st_b, (length - minor_than_pivot_count));
 
-	//rotate list back to original position
+	// printf("After rightR: length=>%d left->%d right->%d\n", length, top, bottom);
+
+	// rotate list back to original position
 	i = 0;
-	while (i < length - left_part_count)
+	while (i < minor_than_pivot_count)
 	{
-		ra(st_a);
+		rra(st_a);
 		i++;
 	}
-
 }
-
-// // suppose pivot is the median
-
-// /* PARTITION FUNCTION
-// 	partitionIndex -> index of partition
-
-// 	p_index -> index of the pivot
-// 	i -> count how many number pushed to stack b
-
-// 	compare pivot with first element
-// 	while (pivot index > 0)
-// 	{
-// 		if (pivot < arr[0])
-// 			rotate();
-// 		else // if less then the pivot push in stack b
-// 		{
-// 			push_b()
-// 			i++;
-// 		}
-// 		p_index--;
-// 	}
-// 	// now we have all the elements less than the pivot in stack b
-// 	// if we push then back to b we get the stack partitioned
-// 	while (i--)
-// 		push_a()
-	
-// 	// Suppose we do not push back the elements to a
-
-// 	now we do the same thing but we keep the lowers numbers and push back to a the 
-//  */
