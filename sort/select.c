@@ -16,14 +16,14 @@ void	smart_top(t_stack* st, int n)
 		while (index)
 		{
 			index--;
-			ra(st);//TODO handle name
+			rotate(st);
 		}
 	}
 	else//reverse rotate
 	{
 		while (index < len)
 		{
-			rra(st);//TODO handle name
+			rev_rotate(st);
 			index++;
 		}
 	}
@@ -57,10 +57,10 @@ void	select_sort(t_stack* sa, t_stack* sb)
 		m = min(sa);
 		// printf("min: %d\n", m);
 		smart_top(sa, m);
-		pb(sb, sa);
+		push(sb, sa);
 	}
 	while (sb->start)
 	{
-		pa(sa, sb);
+		push(sa, sb);
 	}
 }

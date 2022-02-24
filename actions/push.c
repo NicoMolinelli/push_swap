@@ -1,6 +1,11 @@
 #include <stack.h>
 #include <stdio.h>
 
+static void	print_push(int name)
+{
+	printf("p%c\n", name);
+}
+
 // dst destination src source
 void	push(t_stack* dst, t_stack* src)
 {
@@ -14,17 +19,6 @@ void	push(t_stack* dst, t_stack* src)
 		node->next = 0;// check if useful
 		node->prev = 0;// check if useful
 		st_prepend(node, dst);
+		print_push(dst->name);
 	}
-}
-
-void	pa(t_stack* stack_a, t_stack* stack_b)
-{
-	push(stack_a, stack_b);
-	printf("pa\n");
-}
-
-void	pb(t_stack* stack_b, t_stack* stack_a)
-{
-	push(stack_b, stack_a);
-	printf("pb\n");
 }

@@ -1,7 +1,7 @@
 #include <stack.h>
 #include <validate.h>
 
-t_stack*	create_stack(int items)
+t_stack*	create_stack(int items, int name)
 {
 	t_stack* stack;
 
@@ -9,6 +9,7 @@ t_stack*	create_stack(int items)
 	if (!stack)
 		return (0);
 	stack->items = items;
+	stack->name = name;
 	stack->start = 0;
 	stack->end = 0;
 	return (stack);
@@ -31,12 +32,12 @@ t_node	*create_node(int value)
 *	Creates the stack and fill it with all the params in argv converted to ints
 *
 */
-t_stack*	st_fill(char **argv, int items)
+t_stack*	st_fill(char **argv, int items, int name)
 {
 	t_stack*	s;
 	int			val;
 	
-	s = create_stack(items);
+	s = create_stack(items, name);
 	if (!s)
 		return (0);
 	while (*argv)

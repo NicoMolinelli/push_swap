@@ -7,10 +7,10 @@ int	main(int argc, char **argv)
 	t_stack*	st_a;
 	t_stack*	st_b;
 
-	st_a = st_fill(++argv, --argc);// only integerssss
+	st_a = st_fill(++argv, --argc, 97);// only integerssss
 	if (!st_a || argc < 1)
 		return (ft_error());
-	st_b = create_stack(argc);
+	st_b = create_stack(argc, 98);
 	if (!st_b)
 		return ((int) st_clear(st_a));
 	// st_print(st_a);

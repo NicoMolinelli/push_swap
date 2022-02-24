@@ -20,11 +20,11 @@ typedef struct s_stack
 
 
 
-t_stack*	create_stack(int items);
+t_stack*	create_stack(int items, int name);
 t_node		*create_node(int value);
 t_stack*	st_clear(t_stack* s);
 
-t_stack*	st_fill(char **argv, int items);
+t_stack*	st_fill(char **argv, int items, int name);
 t_stack*	st_append(t_node* n, t_stack* st);
 t_stack*	st_prepend(t_node* n, t_stack* st);
 

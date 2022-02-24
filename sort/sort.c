@@ -16,14 +16,14 @@ static void	smart_to_top(t_stack* st, int n)
 		while (index)
 		{
 			index--;
-			ra(st);//TODO handle name
+			rotate(st);
 		}
 	}
 	else//reverse rotate
 	{
 		while (index < len)
 		{
-			rra(st);//TODO handle name
+			rev_rotate(st);
 			index++;
 		}
 	}
@@ -33,7 +33,7 @@ static void	smart_to_top(t_stack* st, int n)
 void	sort_2(t_stack* st)
 {
 	if (st->start->value > st->start->next->value)
-		sa(st);
+		swap(st);
 }
 // sort 3 numbers
 void	sort_3(t_stack* st)
@@ -46,21 +46,21 @@ void	sort_3(t_stack* st)
 	middle = st->start->next->value;
 	end = st->end->value;
 	if (middle < start && start < end)
-		sa(st);
+		swap(st);
 	else if (end < middle && middle < start)
 	{
-		sa(st);
-		rra(st);
+		swap(st);
+		rev_rotate(st);
 	}
 	else if (start > end && end > middle)
-		ra(st);
+		rotate(st);
 	else if (start < end && end < middle)
 	{
-		sa(st);
-		ra(st);
+		swap(st);
+		rotate(st);
 	}
 	else if (middle > start && start > end)
-		rra(st);
+		rev_rotate(st);
 }
 
 void	sort_4ab(t_stack* a, t_stack* b)
@@ -69,9 +69,9 @@ void	sort_4ab(t_stack* a, t_stack* b)
 
 	min = st_min(a, 4);
 	smart_to_top(a, min);
-	pb(b, a);
+	push(b, a);
 	sort_3(a);
-	pa(a, b);
+	push(a, b);
 }
 
 // void	sort_4ba(t_stack* b, t_stack* a)
@@ -80,9 +80,9 @@ void	sort_4ab(t_stack* a, t_stack* b)
 
 // 	max = st_max(b, 4);
 // 	smart_top(b, max);
-// 	pa(a, b);
+// 	push(a, b);
 // 	sort_3(b);
-// 	pb(a, b);
+// 	push(a, b);
 // }
 
 void	sort(t_stack* sta, t_stack* stb, int length)

@@ -1,7 +1,12 @@
 #include <stack.h>
 #include <stdio.h>
 
-static void	swap(t_stack* st)
+static void	print_swap(int name)
+{
+	printf("s%c\n", name);
+}
+
+void	swap(t_stack* st)
 {
 	int	temp;
 
@@ -10,24 +15,12 @@ static void	swap(t_stack* st)
 		temp = st->start->value;
 		st->start->value = st->start->next->value;
 		st->start->next->value = temp;
+		print_swap(st->name);
 	}
-}
-
-void	sa(t_stack* stack_a)
-{
-	swap(stack_a);
-	printf("sa\n");
-}
-
-void	sb(t_stack* stack_b)
-{
-	swap(stack_b);
-	printf("sb\n");
 }
 
 void	ss(t_stack* stack_a, t_stack* stack_b)
 {
 	swap(stack_a);
 	swap(stack_b);
-	printf("ss\n");
 }

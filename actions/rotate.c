@@ -1,7 +1,12 @@
 #include <stack.h>
 #include <stdio.h>
 
-static void	rotate(t_stack* st)
+static void	print_rotate(int name)
+{
+	printf("r%c\n", name);
+}
+
+void	rotate(t_stack* st)
 {
 	t_node*	start;
 
@@ -12,23 +17,12 @@ static void	rotate(t_stack* st)
 	start->next = 0;
 	start->prev = st->end;
 	st->end = start;
+	print_rotate(st->name);
 }
 
-void	ra(t_stack* stack_a)
-{
-	rotate(stack_a);
-	printf("ra\n");
-}
-
-void	rb(t_stack* stack_b)
-{
-	rotate(stack_b);
-	printf("rb\n");
-}
-
+// handle rr
 void	rr(t_stack* stack_a, t_stack* stack_b)
 {
 	rotate(stack_a);
 	rotate(stack_b);
-	printf("rr\n");
 }
