@@ -60,28 +60,32 @@ static int	is_sorted(t_stack* st, int length)
 }
 
 // get the pivot -> move all the el less then the pivot to stb
-void	partition(t_stack* st_a, t_stack* st_b, int length)
+int	partition(t_stack* st_a, t_stack* st_b, int length)
 {
 	t_node* node;
 	int		pivot;
 	int		i;
+	int		small_part;
 
 	// printf("length: %d\n", length);
 	pivot = get_median(st_a, length);
 	// printf("pivot/median: %d\n", pivot);
 	i = 0;
+	small_part = 0;
 	node = st_a->start;
 	while(i < length)
 	{
 		if (node->value < pivot)
-			pb(st_b, st_a);
+		{
+			push(st_b, st_a);
+			small_part++;
+		}
 		else
-			ra(st_a);
+			rotate(st_a);
 		node = st_a->start;
 		i++;
 	}
-	// st_print(st_a);
-	// st_print(st_b);
+	return (small_part);
 }
 
 void	quicksort(t_stack* st_a, t_stack* st_b, int length)
@@ -89,8 +93,6 @@ void	quicksort(t_stack* st_a, t_stack* st_b, int length)
 	int		minor_than_pivot_count;
 	int		i;
 
-	// if (is_sorted(st_a, length))
-	// 	return ;
 	if (is_sorted(st_a, length))
 		return ;
 	if (length == 2)
@@ -98,29 +100,23 @@ void	quicksort(t_stack* st_a, t_stack* st_b, int length)
 		sort_2(st_a);
 		return ;
 	}
-	else if (length == 3)
-	{
-		sort_3(st_a);
-		return ;
-	}
 	// split list (partition)
-	partition(st_a, st_b, length);
-	minor_than_pivot_count = st_len(st_b);
+	minor_than_pivot_count = partition(st_a, st_b, length);
 
 	//reverse the list back to original position
-		i = 0;
+	i = 0;
 	if (st_len(st_a) != (length - minor_than_pivot_count))
 	{
-		while (i < (length - minor_than_pivot_count))// optimize the rotation!
+		while (i < (length - minor_than_pivot_count))
 		{
-			rra(st_a);
+			rev_rotate(st_a);
 			i++;
 		}
 	}
 	// push back on top smaller half
 	while (st_b->start)
 	{
-		pa(st_a, st_b);
+		push(st_a, st_b);
 	}
 
 	// printf("Before leftR: length=>%d left->%d right->%d\n", length, top, bottom);
@@ -129,15 +125,12 @@ void	quicksort(t_stack* st_a, t_stack* st_b, int length)
 	
 	// printf("After leftR: length=>%d left->%d right->%d\n", length, top, bottom);
 	// // put on top the right part
-	// if (length != st_len(st_a))
-	// {
-		i = 0;
-		while (i < minor_than_pivot_count)// optimize the rotation!
-		{
-			ra(st_a);
-			i++;
-		}
-	// }
+	i = 0;
+	while (i < minor_than_pivot_count)// optimize the rotation!
+	{
+		rotate(st_a);
+		i++;
+	}
 	
 	// printf("Before rightR: length=>%d left->%d right->%d\n", length, top, bottom);
 	// //recursion for the right part
@@ -149,7 +142,7 @@ void	quicksort(t_stack* st_a, t_stack* st_b, int length)
 	i = 0;
 	while (i < minor_than_pivot_count)
 	{
-		rra(st_a);
+		rev_rotate(st_a);
 		i++;
 	}
 }

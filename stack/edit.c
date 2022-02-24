@@ -24,7 +24,10 @@ t_stack*	st_prepend(t_node* n, t_stack* st)
 		return (0);
 	start = st->start;
 	if (!start)
+	{
 		st->start = n;
+		st->end = n;
+	}
 	else
 		start->prev = n;
 	n->next = start;
