@@ -9,7 +9,8 @@ FLAGS	=	-Wall -Werror -Wextra
 SRCS	=	main.c validation.c \
 			actions/swap.c actions/rotate.c actions/rev_rotate.c actions/push.c \
 			stack/core.c stack/edit.c stack/print.c stack/get.c \
-			sort/select.c sort/sort.c sort/quick.c
+			sort/select.c sort/sort.c sort/quick2.c \
+			sort/partition.c
 
 H_PATH	=	includes
 

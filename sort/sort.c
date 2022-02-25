@@ -1,6 +1,32 @@
 #include <sort.h>
 #include <actions.h>
 
+int	is_sorted(t_stack* st, int length)
+{
+	t_node* node;
+	t_node* next;
+	int		i;
+
+	if (length <= 1)
+	{
+		
+		return (1);
+	}
+	node = st->start;
+	next = node->next;
+	i = 1;
+	while (i < length && next)
+	{
+		if (node->value > next->value)
+			return (0);
+		node = next;
+		next = node->next;
+		i++;
+	}
+	if (i == length)
+		return (1);
+	return (0);
+}
 
 // fast way to put the node with value n as first element in stack st
 static void	smart_to_top(t_stack* st, int n)
@@ -35,6 +61,7 @@ void	sort_2(t_stack* st)
 	if (st->start->value > st->start->next->value)
 		swap(st);
 }
+
 // sort 3 numbers
 void	sort_3(t_stack* st)
 {
@@ -96,6 +123,10 @@ void	sort(t_stack* sta, t_stack* stb, int length)
 		sort_3(sta);
 	// else if (length == 4)
 	// 	sort_4ab(sta, stb);
+	// else
+	// 	quicksort(sta, stb, length);
+	// else
+	// 	select_sort(sta, stb);
 	else
-		quicksort(sta, stb, length);
+		quicksortA(sta, stb, length);
 }
