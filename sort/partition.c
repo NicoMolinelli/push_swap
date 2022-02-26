@@ -11,13 +11,8 @@ int	get_median(t_stack* st, int length)
 
 	min = st_min(st, length);
 	max = st_max(st, length);
-	// printf("min: %d\n", min);
-	// printf("max: %d\n", max);
 	if (length == 2)
 		return (max);
-	// if (st->start->value == min)//|| st->start->value == max caso in cui primo max e poi min sei spacciato!
-	// 	return (st->start->next->value);
-	// return (st->start->value);
 	median = -1;
 	while (max > min)
 	{
@@ -44,7 +39,7 @@ t_partition	partitionA(t_stack* st_a, t_stack* st_b, int length)
 	pivot = get_median(st_a, length);
 	part.right = 0;
 	part.left = 0;
-	node = st_a->start;
+	node = st_a->head;
 	while(length--)
 	{
 		if (node->value <= pivot)
@@ -52,12 +47,12 @@ t_partition	partitionA(t_stack* st_a, t_stack* st_b, int length)
 			push(st_b, st_a);
 			part.right++;
 		}
-		else
+		else if (st_len(st_a) > 1)// fixxa bene
 		{
 			rotate(st_a);
 			part.left++;
 		}
-		node = st_a->start;
+		node = st_a->head;
 	}
 	return (part);
 }
@@ -72,7 +67,7 @@ t_partition	partitionB(t_stack* st_a, t_stack* st_b, int length)
 	pivot = get_median(st_b, length);
 	part.right = 0;
 	part.left = 0;
-	node = st_b->start;
+	node = st_b->head;
 	while(length--)
 	{
 		if (node->value >= pivot)
@@ -85,7 +80,7 @@ t_partition	partitionB(t_stack* st_a, t_stack* st_b, int length)
 			rotate(st_b);
 			part.right++;
 		}
-		node = st_b->start;
+		node = st_b->head;
 	}
 	return (part);
 }

@@ -2,96 +2,64 @@
 #include <stdio.h>
 #include <sort.h>
 
-// TODO algorith to find it
-// get the average number in stack st(if equal get the max)
-int	get_median(t_stack* st, int length)
+static void	push_back_toA(t_stack* st_a, t_stack* st_b, int length)
 {
-	int	min;
-	int	max;
-	int	 median;
-
-	min = st_min(st, length);
-	max = st_max(st, length);
-	// printf("min: %d\n", min);
-	// printf("max: %d\n", max);
-	if (length == 2)
-		return (max);
-	// if (st->start->value == min)//|| st->start->value == max caso in cui primo max e poi min sei spacciato!
-	// 	return (st->start->next->value);
-	// return (st->start->value);
-	median = -1;
-	while (max > min)
+	while (length--)
 	{
-		max--;
-		min++;
-	}
-	// printf("max: %d\tmin: %d\n", max, min);
-	while (1)
-	{
-		median = st_index(max, st);
-		if (median > -1)
-			return (max);
-		max++;
+		push(st_a, st_b);
 	}
 }
 
-static int	is_sorted(t_stack* st, int length)
+// Sort for only two numbers
+void	sort_2B(t_stack* st)
 {
-	t_node* node;
-	t_node* next;
+	if (st->head->value < st->head->next->value)
+		swap(st);
+}
+
+//int
+void	quicksortB(t_stack* st_a, t_stack* st_b, int length)
+{
+	t_partition	part;
 	int		i;
 
+	printf("length aqui %d\n", length);
 	if (length <= 1)
-		return (1);
-	node = st->start;
-	next = node->next;
-	i = 1;
-	while (i < length && next)
 	{
-		if (node->value > next->value)
-			return (0);
-		node = next;
-		next = node->next;
-		i++;
+		push(st_a, st_b);
+		return ;
 	}
-	if (i == length)
-		return (1);
-	return (0);
-}
+	if (length == 2)
+	{
+		sort_2B(st_b);
+		push_back_toA(st_a, st_b, length);
+		return ;
+	}
 
-// get the pivot -> move all the el less then the pivot to stb
-int	partition(t_stack* st_a, t_stack* st_b, int length)
-{
-	t_node* node;
-	int		pivot;
-	int		i;
-	int		small_part;
+	printf("partitioB\n");
+	part = partitionB(st_a, st_b, length);
 
-	// printf("length: %d\n", length);
-	pivot = get_median(st_a, length);
-	// printf("pivot/median: %d\n", pivot);
+	// put back on top the small part
 	i = 0;
-	small_part = 0;
-	node = st_a->start;
-	while(i < length)
+	if (st_len(st_b) != part.right)
 	{
-		if (node->value < pivot)
+		while (i < part.right)
 		{
-			push(st_b, st_a);
-			small_part++;
+			rev_rotate(st_b);
+			i++;
 		}
-		else
-			rotate(st_a);
-		node = st_a->start;
-		i++;
 	}
-	return (small_part);
+	quicksortA(st_a, st_b, part.left);
+
+
+
+	quicksortB(st_a, st_b, part.right);
 }
 
-void	quicksort(t_stack* st_a, t_stack* st_b, int length)
+void	quicksortA(t_stack* st_a, t_stack* st_b, int length)
 {
-	int		minor_than_pivot_count;
-	int		i;
+	t_partition	part;
+	int	i;
 
 	if (is_sorted(st_a, length))
 		return ;
@@ -100,49 +68,22 @@ void	quicksort(t_stack* st_a, t_stack* st_b, int length)
 		sort_2(st_a);
 		return ;
 	}
-	// split list (partition)
-	minor_than_pivot_count = partition(st_a, st_b, length);
+	printf("partitioA\n");
+	printf("lengthA: %d\n", length);
+	part = partitionA(st_a, st_b, length);
 
-	//reverse the list back to original position
+	// push back on top
 	i = 0;
-	if (st_len(st_a) != (length - minor_than_pivot_count))
+	if (st_len(st_a) != part.left)
 	{
-		while (i < (length - minor_than_pivot_count))
+		while (i < part.left)
 		{
 			rev_rotate(st_a);
 			i++;
 		}
 	}
-	// push back on top smaller half
-	while (st_b->start)
-	{
-		push(st_a, st_b);
-	}
 
-	// printf("Before leftR: length=>%d left->%d right->%d\n", length, top, bottom);
-	//first recursion on the smaller half
-	quicksort(st_a, st_b, minor_than_pivot_count);
-	
-	// printf("After leftR: length=>%d left->%d right->%d\n", length, top, bottom);
-	// // put on top the right part
-	i = 0;
-	while (i < minor_than_pivot_count)// optimize the rotation!
-	{
-		rotate(st_a);
-		i++;
-	}
-	
-	// printf("Before rightR: length=>%d left->%d right->%d\n", length, top, bottom);
-	// //recursion for the right part
-	quicksort(st_a, st_b, (length - minor_than_pivot_count));
+	quicksortA(st_a, st_b, part.left);
 
-	// printf("After rightR: length=>%d left->%d right->%d\n", length, top, bottom);
-
-	// rotate list back to original position
-	i = 0;
-	while (i < minor_than_pivot_count)
-	{
-		rev_rotate(st_a);
-		i++;
-	}
+	quicksortB(st_a, st_b, part.right);
 }
