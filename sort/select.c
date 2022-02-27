@@ -35,10 +35,10 @@ int	min(t_stack* st)
 	t_node*	i;
 	int		min;
 
-	if (!st->start)
+	if (!st->head)
 		return (-1);// stack is empty handle it
-	i = st->start->next;
-	min = st->start->value;
+	i = st->head->next;
+	min = st->head->value;
 	while (i)
 	{
 		if (min > i->value)
@@ -52,14 +52,14 @@ void	select_sort(t_stack* sa, t_stack* sb)
 {
 	int	m;
 	
-	while (sa->start)
+	while (sa->head)
 	{
 		m = min(sa);
 		// printf("min: %d\n", m);
 		smart_top(sa, m);
 		push(sb, sa);
 	}
-	while (sb->start)
+	while (sb->head)
 	{
 		push(sa, sb);
 	}

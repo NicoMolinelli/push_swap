@@ -1,23 +1,32 @@
 #include <stack.h>
 #include <stdio.h>
+#include <libft.h>
 
-static void	print_rotate(int name)
+static void	rotate(t_stack* st)
 {
-	printf("r%c\n", name);
+	t_node*	head;
+
+	head = st->head;// save the current head node
+	st->head = head->next;// new stack head node becames the second node
+	st->head->prev = 0;// head prev points to null
+	st->tail->next = head;// current tail node points to "head"
+	head->next = 0;
+	head->prev = st->tail;
+	st->tail = head;
 }
 
-void	rotate(t_stack* st)
+void	rotateA(t_stacks* ss)
 {
-	t_node*	start;
+	rotate(ss->a);
+	ss->str = ft_strjoin(ss->str, "ra\n");
+	return ;// print error
+}
 
-	start = st->start;// save the current start node
-	st->start = start->next;// new stack start node becames the second node
-	st->start->prev = 0;// start prev points to null
-	st->end->next = start;// current end node points to "start"
-	start->next = 0;
-	start->prev = st->end;
-	st->end = start;
-	print_rotate(st->name);
+void	rotateB(t_stacks* ss)
+{
+	rotate(ss->b);
+	ss->str = ft_strjoin(ss->str, "rb\n");
+		return ;// print error
 }
 
 // handle rr

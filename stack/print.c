@@ -5,7 +5,7 @@ void	st_print(t_stack* s)
 {
 	t_node* i;
 
-	i = s->start;
+	i = s->head;
 	while (i)
 	{
 		printf("%d\t", i->value);
@@ -18,7 +18,7 @@ void	st_rev_print(t_stack* s)
 {
 	t_node* i;
 
-	i = s->end;
+	i = s->tail;
 	while (i)
 	{
 		printf("%d\t", i->value);

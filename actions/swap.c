@@ -1,26 +1,28 @@
 #include <stack.h>
-#include <stdio.h>
+#include <libft.h>
 
-static void	print_swap(int name)
-{
-	printf("s%c\n", name);
-}
-
-void	swap(t_stack* st)
+static void	swap(t_stack* st)
 {
 	int	temp;
 
-	if (st->start && st->start->next)
+	if (st->head && st->head->next)
 	{
-		temp = st->start->value;
-		st->start->value = st->start->next->value;
-		st->start->next->value = temp;
-		print_swap(st->name);
+		temp = st->head->value;
+		st->head->value = st->head->next->value;
+		st->head->next->value = temp;
 	}
 }
 
-void	ss(t_stack* stack_a, t_stack* stack_b)
+void	swapA(t_stacks* ss)
 {
-	swap(stack_a);
-	swap(stack_b);
+	swap(ss->a);
+	ss->str = ft_strjoin(ss->str, "sa\n");
+		return ;// print error
+}
+
+void	swapB(t_stacks* ss)
+{
+	swap(ss->b);
+	ss->str = ft_strjoin(ss->str, "sb\n");
+		return ;// print error
 }

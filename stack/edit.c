@@ -2,35 +2,35 @@
 
 t_stack*	st_append(t_node* n, t_stack* st)
 {
-	t_node*	end;
+	t_node*	tail;
 
 	if (!n)
 		return (0);
-	end = st->end;
-	if (!end)
-		st->start = n;
+	tail = st->tail;
+	if (!tail)
+		st->head = n;
 	else
-		end->next = n;
-	n->prev = st->end;
-	st->end = n;
+		tail->next = n;
+	n->prev = st->tail;
+	st->tail = n;
 	return (st);
 }
 
 t_stack*	st_prepend(t_node* n, t_stack* st)
 {
-	t_node*	start;
+	t_node*	head;
 
 	if (!n)
 		return (0);
-	start = st->start;
-	if (!start)
+	head = st->head;
+	if (!head)
 	{
-		st->start = n;
-		st->end = n;
+		st->head = n;
+		st->tail = n;
 	}
 	else
-		start->prev = n;
-	n->next = start;
-	st->start = n;
+		head->prev = n;
+	n->next = head;
+	st->head = n;
 	return (st);
 }

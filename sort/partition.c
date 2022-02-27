@@ -30,57 +30,57 @@ int	get_median(t_stack* st, int length)
 }
 
 // get the pivot -> move all the el less then the pivot to stb
-t_partition	partitionA(t_stack* st_a, t_stack* st_b, int length)
+t_partition	partitionA(t_stacks* ss, int length)
 {
 	t_node* node;
 	int		pivot;
 	t_partition	part;
 
-	pivot = get_median(st_a, length);
+	pivot = get_median(ss->a, length);
 	part.right = 0;
 	part.left = 0;
-	node = st_a->head;
+	node = ss->a->head;
 	while(length--)
 	{
 		if (node->value <= pivot)
 		{
-			push(st_b, st_a);
+			pushB(ss);
 			part.right++;
 		}
-		else if (st_len(st_a) > 1)// fixxa bene
+		else if (st_len(ss->a) > 1)// fixxa bene
 		{
-			rotate(st_a);
+			rotateA(ss);
 			part.left++;
 		}
-		node = st_a->head;
+		node = ss->a->head;
 	}
 	return (part);
 }
 
 // get the pivot -> move all the el less then the pivot to stb
-t_partition	partitionB(t_stack* st_a, t_stack* st_b, int length)
+t_partition	partitionB(t_stacks* ss, int length)
 {
 	t_node* node;
 	int		pivot;
 	t_partition	part;
 
-	pivot = get_median(st_b, length);
+	pivot = get_median(ss->b, length);
 	part.right = 0;
 	part.left = 0;
-	node = st_b->head;
+	node = ss->b->head;
 	while(length--)
 	{
 		if (node->value >= pivot)
 		{
-			push(st_a, st_b);
+			pushA(ss);
 			part.left++;
 		}
 		else
 		{
-			rotate(st_b);
+			rotateB(ss);
 			part.right++;
 		}
-		node = st_b->head;
+		node = ss->b->head;
 	}
 	return (part);
 }

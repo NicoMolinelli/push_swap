@@ -1,23 +1,31 @@
 #include <stack.h>
-#include <stdio.h>
+#include <libft.h>
 
-static void	print_rev_rotate(int name)
+static void	rev_rotate(t_stack* st)
 {
-	printf("rr%c\n", name);
+	t_node*	tail;
+
+	tail = st->tail;
+	st->tail = tail->prev;// set new tail
+	st->tail->next = 0;// second last becames last
+	st->head->prev = tail;
+	tail->next = st->head;
+	tail->prev = 0;
+	st->head = tail;
 }
 
-void	rev_rotate(t_stack* st)
+void	reverseA(t_stacks* ss)
 {
-	t_node*	end;
+	rev_rotate(ss->a);
+	ss->str = ft_strjoin(ss->str, "rra\n");
+		return ;// print error
+}
 
-	end = st->end;
-	st->end = end->prev;// set new end
-	st->end->next = 0;// second last becames last
-	st->start->prev = end;
-	end->next = st->start;
-	end->prev = 0;
-	st->start = end;
-	print_rev_rotate(st->name);
+void	reverseB(t_stacks* ss)
+{
+	rev_rotate(ss->b);
+	ss->str = ft_strjoin(ss->str, "rrb\n");
+		return ;// print error
 }
 
 void	rrr(t_stack* stack_a, t_stack* stack_b)

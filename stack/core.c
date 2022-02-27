@@ -10,8 +10,8 @@ t_stack*	create_stack(int items, int name)
 		return (0);
 	stack->items = items;
 	stack->name = name;
-	stack->start = 0;
-	stack->end = 0;
+	stack->head = 0;
+	stack->tail = 0;
 	return (stack);
 }
 
@@ -59,7 +59,7 @@ t_stack*	st_clear(t_stack* s)
 
 	if (!s)
 		return (0);
-	i = s->start;
+	i = s->head;
 	while (i)
 	{
 		free(i);

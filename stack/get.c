@@ -8,7 +8,7 @@ int	st_len(t_stack* st)
 	t_node* i;
 	int		len;
 
-	i = st->start;
+	i = st->head;
 	len = 0;
 	while (i)
 	{
@@ -27,7 +27,7 @@ int	st_index(int val, t_stack* st)
 	t_node*	i;
 	int		index;
 
-	i = st->start;
+	i = st->head;
 	index = 0;
 	while (i)
 	{
@@ -47,11 +47,11 @@ int	st_min(t_stack* st, int length)
 	int		min;
 	int		count;
 
-	if (!st->start)
+	if (!st->head)
 		return (-1);// stack is empty handle it
 	count = 1;
-	i = st->start->next;
-	min = st->start->value;
+	i = st->head->next;
+	min = st->head->value;
 	while (i && count < length)
 	{
 		if (min > i->value)
@@ -70,11 +70,11 @@ int	st_max(t_stack* st, int length)
 	int		max;
 	int		count;
 
-	if (!st->start)
+	if (!st->head)
 		return (-1);// stack is empty handle it
 	count = 1;
-	i = st->start->next;
-	max = st->start->value;
+	i = st->head->next;
+	max = st->head->value;
 	while (i && count < length)
 	{
 		if (max < i->value)

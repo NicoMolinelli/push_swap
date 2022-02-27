@@ -3,12 +3,15 @@
 
 #include <stack.h>
 
-void	swap(t_stack* st);
-void	ss(t_stack* stack_a, t_stack* stack_b);
-void	push(t_stack* dst, t_stack* src);
-void	rotate(t_stack* st);
+void	swapA(t_stacks* ss);
+void	swapB(t_stacks* ss);
+void	pushA(t_stacks* ss);
+void	pushB(t_stacks* ss);
+void	rotateA(t_stacks* ss);
+void	rotateB(t_stacks* ss);
+void	reverseA(t_stacks* ss);
+void	reverseB(t_stacks* ss);
 void	rr(t_stack* stack_a, t_stack* stack_b);
-void	rev_rotate(t_stack* st);
 void	rrr(t_stack* stack_a, t_stack* stack_b);
 
 #endif

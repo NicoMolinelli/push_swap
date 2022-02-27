@@ -2,88 +2,87 @@
 #include <stdio.h>
 #include <sort.h>
 
-static void	push_back_toA(t_stack* st_a, t_stack* st_b, int length)
+static void	push_back_toA(t_stacks* ss, int length)
 {
 	while (length--)
 	{
-		push(st_a, st_b);
+		pushA(ss);
 	}
 }
 
 // Sort for only two numbers
-void	sort_2B(t_stack* st)
+void	sort_2B(t_stacks* ss)
 {
-	if (st->head->value < st->head->next->value)
-		swap(st);
+	if (ss->b->head->value < ss->b->head->next->value)
+		swapB(ss);
 }
 
 //int
-void	quicksortB(t_stack* st_a, t_stack* st_b, int length)
+void	quicksortB(t_stacks* ss, int length)
 {
 	t_partition	part;
 	int		i;
 
-	printf("length aqui %d\n", length);
 	if (length <= 1)
 	{
-		push(st_a, st_b);
+		pushA(ss);
 		return ;
 	}
 	if (length == 2)
 	{
-		sort_2B(st_b);
-		push_back_toA(st_a, st_b, length);
+		sort_2B(ss);
+		push_back_toA(ss, length);
 		return ;
 	}
 
-	printf("partitioB\n");
-	part = partitionB(st_a, st_b, length);
+	// printf("partitioB\n");
+	part = partitionB(ss, length);
 
 	// put back on top the small part
 	i = 0;
-	if (st_len(st_b) != part.right)
+	if (st_len(ss->b) != part.right)
 	{
 		while (i < part.right)
 		{
-			rev_rotate(st_b);
+			reverseB(ss);
 			i++;
 		}
 	}
-	quicksortA(st_a, st_b, part.left);
+	quicksortA(ss, part.left);
 
 
 
-	quicksortB(st_a, st_b, part.right);
+	quicksortB(ss, part.right);
 }
 
-void	quicksortA(t_stack* st_a, t_stack* st_b, int length)
+void	quicksortA(t_stacks* ss, int length)
 {
 	t_partition	part;
 	int	i;
 
-	if (is_sorted(st_a, length))
+	if (is_sorted(ss->a, length))
 		return ;
 	if (length == 2)
 	{
-		sort_2(st_a);
+		sort_2(ss);
 		return ;
 	}
-	printf("partitioA\n");
-	printf("lengthA: %d\n", length);
-	part = partitionA(st_a, st_b, length);
+	// printf("partitioA\n");
+	// printf("lengthA: %d\n", length);
+	part = partitionA(ss, length);
 
 	// push back on top
 	i = 0;
-	if (st_len(st_a) != part.left)
+	if (st_len(ss->a) != part.left)
 	{
 		while (i < part.left)
 		{
-			rev_rotate(st_a);
+			reverseA(ss);
 			i++;
 		}
 	}
 
-	quicksortA(st_a, st_b, part.left);
+	quicksortA(ss, part.left);
 
-	quicksortB(st_a, st_b, part.right);
+	quicksortB(ss, part.right);
 }
