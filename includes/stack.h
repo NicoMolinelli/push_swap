@@ -14,11 +14,16 @@ typedef struct s_stack
 {
 	size_t			items;// how many items
 	int				name;// a -> 97 b -> 98
-	struct s_node*	start;
-	struct s_node*	end;
+	struct s_node*	head;
+	struct s_node*	tail;
 }					t_stack;
 
-
+typedef struct s_stacks
+{
+	char*		str;
+	t_stack*	a;
+	t_stack*	b;
+}					t_stacks;
 
 t_stack*	create_stack(int items, int name);
 t_node		*create_node(int value);

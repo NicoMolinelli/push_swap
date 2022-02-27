@@ -17,11 +17,34 @@ void	sort_2B(t_stacks* ss)
 		swapB(ss);
 }
 
+void	putp_ontop(t_stacks* ss, int name, int times)
+{
+	int	length;
+	int	i;
+
+	// todo names
+	if (name == 'a')
+		length = st_len(ss->a);
+	else
+		length = st_len(ss->b);
+	i = 0;
+	if (length != times)
+	{
+		while (i < times)
+		{
+			if (name == 'a')
+				reverseA(ss);
+			else
+				reverseB(ss);
+			i++;
+		}
+	}
+}
+
 //int
 void	quicksortB(t_stacks* ss, int length)
 {
 	t_partition	part;
-	int		i;
 
 	if (length <= 1)
 	{
@@ -34,53 +57,31 @@ void	quicksortB(t_stacks* ss, int length)
 		push_back_toA(ss, length);
 		return ;
 	}
-
 	// printf("partitioB\n");
 	part = partitionB(ss, length);
-
+	// printf("lengthB: %d\tmoved: %d\t right: %d\tleft: %d\n", length, part.moved, part.right, part.left);
 	// put back on top the small part
-	i = 0;
-	if (st_len(ss->b) != part.right)
-	{
-		while (i < part.right)
-		{
-			reverseB(ss);
-			i++;
-		}
-	}
+	putp_ontop(ss, ss->b->name, part.moved);
+	// left rec
 	quicksortA(ss, part.left);
-
-
-
+	// right rec
 	quicksortB(ss, part.right);
 }
 
 void	quicksortA(t_stacks* ss, int length)
 {
 	t_partition	part;
-	int	i;
 
 	if (is_sorted(ss->a, length))
 		return ;
 	if (length == 2)
-	{
-		sort_2(ss);
-		return ;
-	}
+		return (sort_2(ss));
 	// printf("partitioA\n");
 	// printf("lengthA: %d\n", length);
 	part = partitionA(ss, length);
 
 	// push back on top
-	i = 0;
-	if (st_len(ss->a) != part.left)
-	{
-		while (i < part.left)
-		{
-			reverseA(ss);
-			i++;
-		}
-	}
+	putp_ontop(ss, ss->a->name, part.moved);
 
 	quicksortA(ss, part.left);
 

@@ -1,4 +1,5 @@
 #include <sort.h>
+#include <libft.h>
 #include <actions.h>
 
 int	is_sorted(t_stack* st, int length)
@@ -8,11 +9,8 @@ int	is_sorted(t_stack* st, int length)
 	int		i;
 
 	if (length <= 1)
-	{
-		
 		return (1);
-	}
-	node = st->start;
+	node = st->head;
 	next = node->next;
 	i = 1;
 	while (i < length && next)
@@ -29,77 +27,77 @@ int	is_sorted(t_stack* st, int length)
 }
 
 // fast way to put the node with value n as first element in stack st
-static void	smart_to_top(t_stack* st, int n)
-{
-	int	len;
-	int	index;
+// static void	smart_to_top(t_stack* st, int n)
+// {
+// 	int	len;
+// 	int	index;
 
-	len = st_len(st);
-	index = st_index(n, st);
-	// normal rotate
-	if (index <= len / 2)
-	{
-		while (index)
-		{
-			index--;
-			rotate(st);
-		}
-	}
-	else//reverse rotate
-	{
-		while (index < len)
-		{
-			rev_rotate(st);
-			index++;
-		}
-	}
-}
+// 	len = st_len(st);
+// 	index = st_index(n, st);
+// 	// normal rotate
+// 	if (index <= len / 2)
+// 	{
+// 		while (index)
+// 		{
+// 			index--;
+// 			rotateA(st);
+// 		}
+// 	}
+// 	else//reverse rotate
+// 	{
+// 		while (index < len)
+// 		{
+// 			rev_rotate(st);
+// 			index++;
+// 		}
+// 	}
+// }
 
 // Sort for only two numbers
-void	sort_2(t_stack* st)
+void	sort_2(t_stacks* ss)
 {
-	if (st->start->value > st->start->next->value)
-		swap(st);
+	if (ss->a->head->value > ss->a->head->next->value)
+		swapA(ss);
 }
 
 // sort 3 numbers
-void	sort_3(t_stack* st)
+void	sort_3(t_stacks* ss)
 {
-	int	start;
+	int	head;
 	int	middle;
-	int	end;
+	int	tail;
 
-	start = st->start->value;
-	middle = st->start->next->value;
-	end = st->end->value;
-	if (middle < start && start < end)
-		swap(st);
-	else if (end < middle && middle < start)
+	head = ss->a->head->value;
+	middle = ss->a->head->next->value;
+	tail = ss->a->tail->value;
+	if (middle < head && head < tail)
+		swapA(ss);
+	else if (tail < middle && middle < head)
 	{
-		swap(st);
-		rev_rotate(st);
+		swapA(ss);
+		reverseA(ss);
 	}
-	else if (start > end && end > middle)
-		rotate(st);
-	else if (start < end && end < middle)
+	else if (head > tail && tail > middle)
+		rotateA(ss);
+	else if (head < tail && tail < middle)
 	{
-		swap(st);
-		rotate(st);
+		swapA(ss);
+		rotateA(ss);
 	}
-	else if (middle > start && start > end)
-		rev_rotate(st);
+	else if (middle > head && head > tail)
+		reverseA(ss);
 }
 
-void	sort_4ab(t_stack* a, t_stack* b)
-{
-	int	min;
+// void	sort_4ab(t_stack* a, t_stack* b)
+// {
+// 	int	min;
 
-	min = st_min(a, 4);
-	smart_to_top(a, min);
-	push(b, a);
-	sort_3(a);
-	push(a, b);
-}
+// 	min = st_min(a, 4);
+// 	smart_to_top(a, min);
+// 	push(b, a);
+// 	sort_3(a);
+// 	push(a, b);
+// }
 
 // void	sort_4ba(t_stack* b, t_stack* a)
 // {
@@ -112,21 +110,24 @@ void	sort_4ab(t_stack* a, t_stack* b)
 // 	push(a, b);
 // }
 
-void	sort(t_stack* sta, t_stack* stb, int length)
+void	sort(t_stacks* ss, int length)
 {
 	//maybe lookup table?
 	if (length == 1)
 		return ;
 	if (length == 2)
-		sort_2(sta);
+		sort_2(ss);
 	else if (length == 3)
-		sort_3(sta);
-	// else if (length == 4)
-	// 	sort_4ab(sta, stb);
-	// else
-	// 	quicksort(sta, stb, length);
-	// else
-	// 	select_sort(sta, stb);
+		sort_3(ss);
 	else
-		quicksortA(sta, stb, length);
+		quicksortA(ss, length);
+	pattern_check(ss);
 }
+
+// rb -> pa -> rrb -> pb
+// |
+// sb
+
+// rb -> pa -> rrb
+// |
+// sb -> pa
