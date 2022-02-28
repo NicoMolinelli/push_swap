@@ -76,6 +76,8 @@ void	quicksortA(t_stacks* ss, int length)
 		return ;
 	if (length == 2)
 		return (sort_2(ss));
+	// if (length <= 10)
+	// 	return (select_sort(ss, length));
 	// printf("partitioA\n");
 	// printf("lengthA: %d\n", length);
 	part = partitionA(ss, length);

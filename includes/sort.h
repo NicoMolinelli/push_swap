@@ -12,11 +12,12 @@ typedef struct s_partition
 } t_partition;
 
 void	sort(t_stacks* ss, int length);
-// void	select_sort(t_stack* sa, t_stack* sb);
+void	select_sort(t_stacks* ss, int length);
 void	quicksortA(t_stacks* ss, int length);
 void	sort_2(t_stacks* ss);
 void	sort_3(t_stacks* ss);
 // void	sort_4ab(t_stack* a, t_stack* b);
+void	handSort(t_stacks* ss, int length);
 
 t_partition	partitionB(t_stacks* ss, int length);
 t_partition	partitionA(t_stacks* ss, int length);

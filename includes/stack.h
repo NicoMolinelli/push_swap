@@ -42,4 +42,7 @@ int			st_max(t_stack* st, int length);
 void		st_print(t_stack* s);
 void		st_rev_print(t_stack* s);
 
+int			is_sorted(t_stack* st, int length);
+void		smart_top(t_stacks* ss, int n);
+
 #endif

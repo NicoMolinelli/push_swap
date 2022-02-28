@@ -1,33 +1,6 @@
-#include <stack.h>
-#include <actions.h>
+#include <sort.h>
 #include <stdio.h>
-
-// fast way to put the node with value n as first element in stack st
-void	smart_top(t_stack* st, int n)
-{
-	int	len;
-	int	index;
-
-	len = st_len(st);
-	index = st_index(n, st);
-	// normal rotate
-	if (index <= len / 2)
-	{
-		while (index)
-		{
-			index--;
-			rotate(st);
-		}
-	}
-	else//reverse rotate
-	{
-		while (index < len)
-		{
-			rev_rotate(st);
-			index++;
-		}
-	}
-}
+#include <actions.h>
 
 // find and return min value in stack
 int	min(t_stack* st)
@@ -48,19 +21,23 @@ int	min(t_stack* st)
 	return (min);
 }
 
-void	select_sort(t_stack* sa, t_stack* sb)
+void	select_sort(t_stacks* ss, int length)
 {
 	int	m;
+	int	i;
 	
-	while (sa->head)
+	i = 0;
+	while (i < length - 2)
 	{
-		m = min(sa);
-		// printf("min: %d\n", m);
-		smart_top(sa, m);
-		push(sb, sa);
+		m = min(ss->a);
+		printf("min: %d\n", m);
+		smart_top(ss, m);
+		pushB(ss);
+		i++;
 	}
-	while (sb->head)
+	sort_2(ss);
+	while (i--)
 	{
-		push(sa, sb);
+		pushA(ss);
 	}
 }
