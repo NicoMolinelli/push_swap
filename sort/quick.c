@@ -17,6 +17,7 @@ void	sort_2B(t_stacks* ss)
 		swapB(ss);
 }
 
+// Remake it better
 void	putp_ontop(t_stacks* ss, int name, int times)
 {
 	int	length;
@@ -27,16 +28,31 @@ void	putp_ontop(t_stacks* ss, int name, int times)
 		length = st_len(ss->a);
 	else
 		length = st_len(ss->b);
-	i = 0;
 	if (length != times)
 	{
-		while (i < times)
+		i = 0;
+		// printf("length: %d times: %d\n", length, times);
+		if (length / 2 >= times)
 		{
-			if (name == 'a')
-				reverseA(ss);
-			else
-				reverseB(ss);
-			i++;
+			while (i < times)
+			{
+				if (name == 'a')
+					reverseA(ss);
+				else
+					reverseB(ss);
+				i++;
+			}
+		}
+		else
+		{
+			while (i < length - times)
+			{
+				if (name == 'a')
+					rotateA(ss);
+				else
+					rotateB(ss);
+				i++;
+			}
 		}
 	}
 }

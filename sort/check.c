@@ -4,24 +4,28 @@
 #include <unistd.h>
 
 #define p1 "ra\npb\nrra\npa\n"
-#define p2 "ra"
+#define p2 "rra\nra\n"
+#define p3 "rrb\nrb\n"
+#define p6 "rb\npa\nrrb\n"
+#define p7 "ra\npb\nrra\n"
+#define p5 "rb\npa\nrrb\npb\n"
+
+char	*strrep(char* str, char* find, char* rep);
 
 void	pattern_check(t_stacks* ss)
 {
-	// char *toni = strstr(ss->str, p1);
-	// ft_putstr_fd(toni, 1);
-	// while(toni)
-	// {
-	// 	toni = strstr(toni + ft_strlen(p1), p1);
-	// 	write(1, "oo\n", 3);
-	// }
-	// char *pino = strstr(ss->str, p1);
-	// ft_putstr_fd(pino, 1);
-	// while(pino)
-	// {
-	// 	pino = strstr(pino + ft_strlen(p1), p1);
-	// 	write(1, "oo\n", 3);
-	// }
+	ss->str = strrep(ss->str, p1, "sa\n");
+	ss->str = strrep(ss->str, p5, "sb\n");
+	ss->str = strrep(ss->str, p6, "sb\npa\n");
+	ss->str = strrep(ss->str, p7, "sa\npb\n");
+	ss->str = strrep(ss->str, p2, "");
+	ss->str = strrep(ss->str, p2, "");
+	ss->str = strrep(ss->str, p2, "");
+	ss->str = strrep(ss->str, p2, "");
+	ss->str = strrep(ss->str, p3, "");
+	ss->str = strrep(ss->str, p3, "");
+	ss->str = strrep(ss->str, p3, "");
+	ss->str = strrep(ss->str, p3, "");
 	ft_putstr_fd(ss->str, 1);
 	free(ss->str);
 }

@@ -8,7 +8,8 @@ SRCS	=	main.c validation.c \
 			actions/swap.c actions/rotate.c actions/rev_rotate.c actions/push.c \
 			stack/core.c stack/edit.c stack/print.c stack/get.c \
 			sort/sort.c sort/quick.c sort/select.c sort/hand.c \
-			sort/partition.c sort/check.c sort/util.c
+			sort/partition.c sort/check.c sort/util.c \
+			strrep.c
 
 H_PATH	=	includes
 
