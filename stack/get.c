@@ -39,6 +39,27 @@ int	st_index(int val, t_stack* st)
 	return (-1);
 }
 
+/*
+*	finds the value at index position in stack st
+*	return the value found
+*/
+int	st_val(int index, t_stack* st)
+{
+	t_node*	i;
+	int		count;
+
+	if (index == 0)
+		return (st->head->value);
+	i = st->head;
+	count = 0;
+	while (count < index)
+	{
+		i = i->next;
+		count++;
+	}
+	return (i->value);
+}
+
 // CLEAN!!
 // find and return min value in stack
 int	st_min(t_stack* st, int length)

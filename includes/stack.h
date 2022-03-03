@@ -5,9 +5,10 @@
 
 typedef struct s_node
 {
+	int				value;
+	int				index;
 	struct s_node*	prev;
 	struct s_node*	next;
-	int				value;
 }					t_node;
 
 typedef struct s_stack
@@ -35,12 +36,16 @@ t_stack*	st_prepend(t_node* n, t_stack* st);
 
 int			st_len(t_stack* st);
 int			st_index(int val, t_stack* st);
+int			st_val(int index, t_stack* st);
 int			st_min(t_stack* st, int length);
 int			st_max(t_stack* st, int length);
+
+void		set_indexes(t_stack* st);
 
 
 void		st_print(t_stack* s);
 void		st_rev_print(t_stack* s);
+void		st_print_index(t_stack* s);
 
 int			is_sorted(t_stack* st, int length);
 void		smart_top(t_stacks* ss, int n);

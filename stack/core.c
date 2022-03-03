@@ -49,6 +49,7 @@ t_stack*	st_fill(char **argv, int items, int name)
 			return st_clear(s);
 		argv++;
 	}
+	set_indexes(s);
 	return (s);
 }
 
