@@ -1,7 +1,7 @@
 #include <libft.h>
 #include <stack.h>
 #include <string.h>
-#include <unistd.h>
+#include <validate.h>
 
 #define p1 "ra\npb\nrra\npa\n"
 #define p2 "rra\nra\n"
@@ -10,22 +10,52 @@
 #define p7 "ra\npb\nrra\n"
 #define p5 "rb\npa\nrrb\npb\n"
 
-char	*strrep(char* str, char* find, char* rep);
+static int duplicates(t_stacks* ss)
+{
+	int	i;
+
+	i = 6;
+	while (i--)
+	{
+		ss->str = strrep(ss->str, p2, "");
+		if (!ss->str)
+			return (0);
+		ss->str = strrep(ss->str, p3, "");
+		if (!ss->str)
+			return (0);
+	}
+	return (1);
+}
+
+static int cleaner(t_stacks* ss)
+{
+	ss->str = strrep(ss->str, p1, "sa\n");
+	if (!ss->str)
+		return (0);
+	ss->str = strrep(ss->str, p5, "sb\n");
+	if (!ss->str)
+		return (0);
+	ss->str = strrep(ss->str, p6, "sb\npa\n");
+	if (!ss->str)
+		return (0);
+	ss->str = strrep(ss->str, p7, "sa\npb\n");
+	if (!ss->str)
+		return (0);
+	return (1);
+}
 
 void	pattern_check(t_stacks* ss)
 {
-	ss->str = strrep(ss->str, p1, "sa\n");
-	ss->str = strrep(ss->str, p5, "sb\n");
-	ss->str = strrep(ss->str, p6, "sb\npa\n");
-	ss->str = strrep(ss->str, p7, "sa\npb\n");
-	ss->str = strrep(ss->str, p2, "");
-	ss->str = strrep(ss->str, p2, "");
-	ss->str = strrep(ss->str, p2, "");
-	ss->str = strrep(ss->str, p2, "");
-	ss->str = strrep(ss->str, p3, "");
-	ss->str = strrep(ss->str, p3, "");
-	ss->str = strrep(ss->str, p3, "");
-	ss->str = strrep(ss->str, p3, "");
+	if (!cleaner(ss))
+	{
+		ft_error();
+		return ;
+	}
+	if (!duplicates(ss))
+	{
+		ft_error();
+		return ;
+	}
 	ft_putstr_fd(ss->str, 1);
 	free(ss->str);
 }
