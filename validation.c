@@ -22,7 +22,7 @@ int	is_number(char *str)
 	return (1);
 }
 
-int	ft_error(void)
+t_stacks*	ft_error(void)
 {
 	write(2, "Error\n", 6);
 	return(0);

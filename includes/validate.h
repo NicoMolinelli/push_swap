@@ -3,8 +3,9 @@
 
 #include <libft.h>
 #include <unistd.h>
+#include <stack.h>
 
-int	is_number(char *str);
-int	ft_error(void);
+int		is_number(char *str);
+t_stacks*	ft_error(void);
 
 #endif

@@ -9,7 +9,7 @@ SRCS	=	main.c validation.c \
 			stack/core.c stack/edit.c stack/print.c stack/get.c \
 			sort/sort.c sort/quick.c sort/select.c sort/hand.c \
 			sort/partition.c sort/check.c sort/util.c \
-			strrep.c sort/index.c
+			sort/index.c
 
 H_PATH	=	includes
 
