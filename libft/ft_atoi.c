@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_atoi.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:20:59 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 15:21:00 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	n;
-	int	sign;
+	long	n;
+	int		sign;
 
 	n = 0;
 	sign = 1;

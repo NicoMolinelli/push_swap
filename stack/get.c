@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   get.c                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:01:39 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:55:15 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stack.h>
 
 /*
 *	get the actual length of the stack st	
 */
-int	st_len(t_stack* st)
+int	st_len(t_stack *st)
 {
-	t_node* i;
+	t_node	*i;
 	int		len;
 
 	i = st->head;
@@ -22,9 +34,9 @@ int	st_len(t_stack* st)
 *	finds the first occurence of value val in stack st and returns its index
 *	return -1 if no occurencies
 */
-int	st_index(int val, t_stack* st)
+int	st_index(int val, t_stack *st)
 {
-	t_node*	i;
+	t_node	*i;
 	int		index;
 
 	i = st->head;
@@ -43,9 +55,9 @@ int	st_index(int val, t_stack* st)
 *	finds the value at index position in stack st
 *	return the value found
 */
-int	st_val(int index, t_stack* st)
+int	st_val(int index, t_stack *st)
 {
-	t_node*	i;
+	t_node	*i;
 	int		count;
 
 	if (index == 0)
@@ -60,16 +72,12 @@ int	st_val(int index, t_stack* st)
 	return (i->value);
 }
 
-// CLEAN!!
-// find and return min value in stack
-int	st_min(t_stack* st, int length)
+int	st_min(t_stack *st, int length)
 {
-	t_node*	i;
+	t_node	*i;
 	int		min;
 	int		count;
 
-	if (!st->head)
-		return (-1);// stack is empty handle it
 	count = 1;
 	i = st->head->next;
 	min = st->head->value;
@@ -83,16 +91,13 @@ int	st_min(t_stack* st, int length)
 	return (min);
 }
 
-// CLEAN!!
 // find and return min value in stack
-int	st_max(t_stack* st, int length)
+int	st_max(t_stack *st, int length)
 {
-	t_node*	i;
+	t_node	*i;
 	int		max;
 	int		count;
 
-	if (!st->head)
-		return (-1);// stack is empty handle it
 	count = 1;
 	i = st->head->next;
 	max = st->head->value;

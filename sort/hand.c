@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   hand.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:02:09 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:29:24 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sort.h>
 #include <actions.h>
 
 // Sort for only two numbers
-void	sort_2(t_stacks* ss)
+void	sort_2(t_stacks *ss)
 {
 	if (ss->a->head->value > ss->a->head->next->value)
-		swapA(ss);
+		swap_a(ss);
 }
 
 // sort 3 numbers
-void	sort_3(t_stacks* ss)
+void	sort_3(t_stacks *ss)
 {
 	int	head;
 	int	middle;
@@ -19,32 +31,28 @@ void	sort_3(t_stacks* ss)
 	middle = ss->a->head->next->value;
 	tail = ss->a->tail->value;
 	if (middle < head && head < tail)
-		swapA(ss);
+		swap_a(ss);
 	else if (tail < middle && middle < head)
 	{
-		swapA(ss);
-		reverseA(ss);
+		swap_a(ss);
+		reverse_a(ss);
 	}
 	else if (head > tail && tail > middle)
-		rotateA(ss);
+		rotate_a(ss);
 	else if (head < tail && tail < middle)
 	{
-		swapA(ss);
-		rotateA(ss);
+		swap_a(ss);
+		rotate_a(ss);
 	}
 	else if (middle > head && head > tail)
-		reverseA(ss);
+		reverse_a(ss);
 }
 
-void	handSort(t_stacks* ss, int length)
+void	hand_sort(t_stacks *ss, int length)
 {
 	int	min;
 	int	i;
-	// prendi i due piu piccoli
-	// li sposti in b
-	// sorti a con 3
-	// sposti i piu piccoli in a
-	// swappi
+
 	if (length == 1)
 		return ;
 	if (length == 2)
@@ -58,12 +66,12 @@ void	handSort(t_stacks* ss, int length)
 	{
 		min = st_min(ss->a, length);
 		smart_top(ss, min);
-		pushB(ss);
+		push_b(ss);
 		length--;
 		i++;
 	}
 	sort_3(ss);
-	while(i--)
-		pushA(ss);
+	while (i--)
+		push_a(ss);
 	sort_2(ss);
 }

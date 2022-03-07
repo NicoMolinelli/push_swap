@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:04:18 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 18:25:47 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sort.h>
 #include <validate.h>
 
 int	main(int argc, char **argv)
 {
-	t_stacks*	ss;
+	t_stacks	*ss;
 
 	ss = create_stacks(--argc, ++argv);
 	if (!ss)

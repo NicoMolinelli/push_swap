@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   validation.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:04:32 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 15:17:17 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <validate.h>
 
 static int	ft_issign(int c)
@@ -22,8 +34,8 @@ int	is_number(char *str)
 	return (1);
 }
 
-t_stacks*	ft_error(void)
+t_stacks	*ft_error(void)
 {
 	write(2, "Error\n", 6);
-	return(0);
+	return (0);
 }

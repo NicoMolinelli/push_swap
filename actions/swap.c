@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   swap.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:03:43 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:17:04 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stack.h>
 #include <libft.h>
 
-static void	swap(t_stack* st)
+static void	swap(t_stack *st)
 {
 	int	temp;
 
@@ -13,16 +25,24 @@ static void	swap(t_stack* st)
 	}
 }
 
-void	swapA(t_stacks* ss)
+void	swap_a(t_stacks *ss)
 {
-	swap(ss->a);
-	ss->str = ft_strjoin(ss->str, "sa\n");
-		return ;// print error
+	if (!ss->err)
+	{
+		swap(ss->a);
+		ss->str = ft_strjoin(ss->str, "sa\n");
+		if (!ss->str)
+			ss->err = 1;
+	}
 }
 
-void	swapB(t_stacks* ss)
+void	swap_b(t_stacks *ss)
 {
-	swap(ss->b);
-	ss->str = ft_strjoin(ss->str, "sb\n");
-		return ;// print error
+	if (!ss->err)
+	{
+		swap(ss->b);
+		ss->str = ft_strjoin(ss->str, "sb\n");
+		if (!ss->str)
+			ss->err = 1;
+	}
 }

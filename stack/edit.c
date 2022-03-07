@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   edit.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:01:12 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:54:15 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stack.h>
 
-t_stack*	st_append(t_node* n, t_stack* st)
+t_stack	*st_append(t_node *n, t_stack *st)
 {
-	t_node*	tail;
+	t_node	*tail;
 
 	if (!n)
 		return (0);
@@ -16,9 +28,9 @@ t_stack*	st_append(t_node* n, t_stack* st)
 	return (st);
 }
 
-t_stack*	st_prepend(t_node* n, t_stack* st)
+t_stack	*st_prepend(t_node *n, t_stack *st)
 {
-	t_node*	head;
+	t_node	*head;
 
 	if (!n)
 		return (0);

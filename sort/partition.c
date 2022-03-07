@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   partition.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:02:30 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:46:39 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sort.h>
 #include <actions.h>
 
-int	others(t_stacks* ss, int name, int pivot, int length)
+int	others(t_stacks *ss, int name, int pivot, int length)
 {
-	int 	i;
-	t_node* n;
+	int		i;
+	t_node	*n;
 
 	i = 0;
 	if (name == 'a')
@@ -24,10 +36,10 @@ int	others(t_stacks* ss, int name, int pivot, int length)
 }
 
 // get the pivot -> move all the el less then the pivot to stb
-t_partition	partitionA(t_stacks* ss, int length)
+t_partition	partition_a(t_stacks *ss, int length)
 {
-	t_node* node;
-	int		pivot;
+	t_node		*node;
+	int			pivot;
 	t_partition	part;
 
 	pivot = get_median(ss->a, length);
@@ -35,16 +47,16 @@ t_partition	partitionA(t_stacks* ss, int length)
 	part.left = 0;
 	part.moved = 0;
 	node = ss->a->head;
-	while(length--)
+	while (length--)
 	{
 		if (node->value < pivot)
 		{
-			pushB(ss);
+			push_b(ss);
 			part.right++;
 		}
 		else if (others(ss, 'a', pivot, length + 1))
 		{
-			rotateA(ss);
+			rotate_a(ss);
 			part.left++;
 			part.moved++;
 		}
@@ -56,10 +68,10 @@ t_partition	partitionA(t_stacks* ss, int length)
 }
 
 // get the pivot -> move all the el less then the pivot to stb
-t_partition	partitionB(t_stacks* ss, int length)
+t_partition	partition_b(t_stacks *ss, int length)
 {
-	t_node* node;
-	int		pivot;
+	t_node		*node;
+	int			pivot;
 	t_partition	part;
 
 	pivot = get_median(ss->b, length);
@@ -67,16 +79,16 @@ t_partition	partitionB(t_stacks* ss, int length)
 	part.left = 0;
 	part.moved = 0;
 	node = ss->b->head;
-	while(length--)
+	while (length--)
 	{
 		if (node->value >= pivot)
 		{
-			pushA(ss);
+			push_a(ss);
 			part.left++;
 		}
 		else if (others(ss, 'b', pivot, length + 1))
 		{
-			rotateB(ss);
+			rotate_b(ss);
 			part.right++;
 			part.moved++;
 		}

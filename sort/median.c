@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   median.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:02:20 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:30:52 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stack.h>
 
 // get the node in stack st with index valalue index
-static int	get_index_val(t_stack* st, int index)
+static int	get_index_val(t_stack *st, int index)
 {
-	t_node*	n;
+	t_node	*n;
 
 	n = st->head;
 	while (n)
@@ -16,9 +28,9 @@ static int	get_index_val(t_stack* st, int index)
 }
 
 // find and return min index in stack
-static int	st_min_index(t_stack* st, int length)
+static int	st_min_index(t_stack *st, int length)
 {
-	t_node*	i;
+	t_node	*i;
 	int		min;
 	int		count;
 
@@ -36,9 +48,9 @@ static int	st_min_index(t_stack* st, int length)
 }
 
 // find and return min value in stack
-static int	st_max_index(t_stack* st, int length)
+static int	st_max_index(t_stack *st, int length)
 {
-	t_node*	i;
+	t_node	*i;
 	int		max;
 	int		count;
 
@@ -56,7 +68,7 @@ static int	st_max_index(t_stack* st, int length)
 }
 
 // get the average number in stack st(if equal get the max)
-int	get_median(t_stack* st, int length)
+int	get_median(t_stack *st, int length)
 {
 	int	min;
 	int	max;
