@@ -24,6 +24,22 @@ static void	set_index(t_stack* st, int value, int index)
 	n->index = index;
 }
 
+static int	next(t_stack* st, int val)
+{
+	int		next;
+	t_node*	i;
+
+	i = st->head;
+	next = st_max(st, st_len(st));
+	while (i)
+	{
+		if (i->value < next && i->value > val)
+			next = i->value;
+		i = i->next;
+	}
+	return (next);
+}
+
 void	set_indexes(t_stack* st)
 {
 	int	val;
@@ -40,6 +56,6 @@ void	set_indexes(t_stack* st)
 			set_index(st, val, index);
 			index++;
 		}
-		val++;
+		val = next(st, val);
 	}
 }

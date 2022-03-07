@@ -1,5 +1,6 @@
-#include <sort.h>
-#include <validate.h>
+#include <actions.h>
+#include <libft.h>
+#include <stdio.h>
 /*
 PUSH_SWAP TODO
 
@@ -14,37 +15,30 @@ PUSH_SWAP TODO
 - norminette
 */
 
-t_stacks*	sts_clear(t_stacks* ss, int error)
+typedef struct s_item
 {
-	if (!ss)
-		return (0);
-	st_clear(ss->a);
-	st_clear(ss->b);
-	free(ss);
-	if (error)
-		return (ft_error());
+	void	(*op)(t_stacks* s);
+	char*	key;
+}			t_item;
+
+//https://benhoyt.com/writings/hash-table-in-c/
+int	do_op(t_stacks* ss, t_item items[10], char* key)
+{
+	int	i;
+
+	i = 10;
+	while (i--)
+	{
+		if (!ft_strncmp(items[i].key, key, ft_strlen(items[i].key)))
+		{
+			items[i].op(ss);
+			return (1);
+		}
+	}
 	return (0);
 }
 
-t_stacks* create_stacks(int argc, char** argv)
-{
-	t_stacks* ss;
-
-	ss = malloc(sizeof(t_stacks));
-	if (!ss)
-		return (ft_error());
-	ss->str = 0;
-	ss->a = st_fill(argv, argc, 97);// only integerssss
-	if (!ss->a)
-		return (sts_clear(ss, 1));
-	ss->b = create_stack(argc, 98);
-	if (!ss->b)
-		return (sts_clear(ss, 1));
-	return (ss);
-}
-
-	//https://benhoyt.com/writings/hash-table-in-c/
-int	checker(t_stacks* ss)
+int	checker(t_stacks* ss, t_item items[10])
 {
 	char	stream[100001];
 	int		bytes;
@@ -61,7 +55,7 @@ int	checker(t_stacks* ss)
 		if (stream[i] == '\n')
 		{
 			key[k] = 0;
-			int success = nice_function_name(ss, table, key)
+			int success = do_op(ss, items, key)
 			if (!success)
 				return (ft_error());
 		}
@@ -75,12 +69,15 @@ int	checker(t_stacks* ss)
 int	main(int argc, char **argv)
 {
 	t_stacks*	ss;
+	static t_item		items[10];
 
 	ss = create_stacks(--argc, ++argv);
 	if (!ss)
 		return (0);
 	// st_print(ss->a);
-	checker(ss);
+	set_items(items);
+	// printf("%s\n", items[1].key);
+	checker(ss, items);
 	// st_print(ss->a);
 	sts_clear(ss, 0);
 	// system("leaks push_swap");

@@ -1,5 +1,20 @@
 #include <stack.h>
 
+// get the node in stack st with index valalue index
+static int	get_index_val(t_stack* st, int index)
+{
+	t_node*	n;
+
+	n = st->head;
+	while (n)
+	{
+		if (n->index == index)
+			return (n->value);
+		n = n->next;
+	}
+	return (0);
+}
+
 // find and return min index in stack
 static int	st_min_index(t_stack* st, int length)
 {
@@ -48,8 +63,7 @@ int	get_median(t_stack* st, int length)
 	int	gap;
 
 	min = st_min_index(st, length);
-	printf
 	max = st_max_index(st, length);
 	gap = (max - min) / 2;
-	return (gap + min);
+	return (get_index_val(st, gap + min));
 }

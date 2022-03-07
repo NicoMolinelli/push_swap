@@ -50,4 +50,7 @@ void		st_print_index(t_stack* s);
 int			is_sorted(t_stack* st, int length);
 void		smart_top(t_stacks* ss, int n);
 
+t_stacks*	sts_clear(t_stacks* ss, int error);
+t_stacks* 	create_stacks(int argc, char** argv);
+
 #endif

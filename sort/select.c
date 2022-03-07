@@ -1,5 +1,4 @@
 #include <sort.h>
-#include <stdio.h>
 #include <actions.h>
 
 // find and return min value in stack
@@ -30,7 +29,7 @@ void	select_sort(t_stacks* ss, int length)
 	while (i < length - 2)
 	{
 		m = min(ss->a);
-		printf("min: %d\n", m);
+		// printf("min: %d\n", m);
 		smart_top(ss, m);
 		pushB(ss);
 		i++;

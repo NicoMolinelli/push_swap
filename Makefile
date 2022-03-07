@@ -4,12 +4,14 @@ LIBFT	=	libft/libft.a
 
 FLAGS	=	-Wall -Werror -Wextra
 
-SRCS	=	main.c validation.c \
+SRCS	=	validation.c \
 			actions/swap.c actions/rotate.c actions/rev_rotate.c actions/push.c \
-			stack/core.c stack/edit.c stack/print.c stack/get.c \
+			stack/core.c stack/edit.c stack/print.c stack/get.c stack/util.c \
 			sort/sort.c sort/quick.c sort/select.c sort/hand.c \
 			sort/partition.c sort/check.c sort/util.c \
 			sort/index.c sort/median.c
+
+BSRC	=	checker_bonus/checker.c checker_bonus/op.c
 
 H_PATH	=	includes
 
@@ -17,11 +19,14 @@ RM		=	rm -f
 
 all: ${NAME}
 
-${NAME}: ${LIBFT} ${SRCS}
+${NAME}: ${LIBFT} ${SRCS} main.c
 	$(CC) $(FLAGS) -o $@ -I ${H_PATH} $^
 
 ${LIBFT}:
 	make -C libft
+
+bonus: ${LIBFT} $(SRCS) $(BSRC)
+	$(CC) $(FLAGS) -o $@ -I ${H_PATH} $^
 
 t10: ${NAME}
 	./$< `ruby -e "puts (0..9).to_a.shuffle.join(' ')"`

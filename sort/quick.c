@@ -1,5 +1,4 @@
 #include <actions.h>
-#include <stdio.h>
 #include <sort.h>
 
 static void	push_back_toA(t_stacks* ss, int length)
