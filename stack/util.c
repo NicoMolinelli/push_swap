@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:01:53 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 16:43:35 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 17:58:37 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_stacks	*sts_clear(t_stacks *ss, int error)
 {
 	if (!ss)
 		return (0);
-	st_clear(ss->a);
-	st_clear(ss->b);
+	st_clear(ss->a, 0);
+	st_clear(ss->b, 0);
 	free(ss);
 	if (error)
 		return (ft_error());
@@ -43,7 +43,7 @@ t_stacks	*create_stacks(int argc, char **argv)
 	ss->b = create_stack(argc, 98);
 	if (!ss->b)
 	{
-		st_clear(ss->a);
+		st_clear(ss->a, 0);
 		free(ss);
 		return (ft_error());
 	}

@@ -1,84 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   checker.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:04:04 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/08 18:22:13 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <actions.h>
+#include <validate.h>
+#include <get_next_line.h>
 #include <libft.h>
-#include <stdio.h>
-/*
-PUSH_SWAP TODO
+#include <checker.h>
 
-- check for only integers values
 
-- get_median algo
-
-- improve algo with 100(stay lower 700 op)
-
-- leaks checks
-
-- norminette
-*/
-
-typedef struct s_item
+int	checker(t_stacks *ss, t_item items[OP_LEN])
 {
-	void	(*op)(t_stacks* s);
-	char*	key;
-}			t_item;
+	char	*line;
 
-//https://benhoyt.com/writings/hash-table-in-c/
-int	do_op(t_stacks* ss, t_item items[10], char* key)
-{
-	int	i;
-
-	i = 10;
-	while (i--)
+	line = get_next_line(0);
+	while (line)
 	{
-		if (!ft_strncmp(items[i].key, key, ft_strlen(items[i].key)))
+		if (!do_op(ss, items, line))
 		{
-			items[i].op(ss);
-			return (1);
+			free(line);
+			return ((int) ft_error());
 		}
+		free(line);
+		line = get_next_line(0);
 	}
-	return (0);
-}
-
-int	checker(t_stacks* ss, t_item items[10])
-{
-	char	stream[100001];
-	int		bytes;
-	char	key[10];
-	int		i;
-	int		k;
-
-	i = 0;
-	k = 0;
-	bytes = read(1, &stream, 100000);
-	stream [bytes] = 0;
-	while (stream[i])
-	{
-		if (stream[i] == '\n')
-		{
-			key[k] = 0;
-			int success = do_op(ss, items, key)
-			if (!success)
-				return (ft_error());
-		}
-		else
-			key[k++] = stream[i];
-		
-		i++;
-	}
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stacks*	ss;
-	static t_item		items[10];
+	t_stacks			*ss;
+	static t_item		items[OP_LEN];
 
 	ss = create_stacks(--argc, ++argv);
 	if (!ss)
 		return (0);
-	// st_print(ss->a);
 	set_items(items);
-	// printf("%s\n", items[1].key);
-	checker(ss, items);
-	// st_print(ss->a);
+	if (checker(ss, items))
+	{
+		if (is_sorted(ss->a, st_len(ss->a)) && !ss->b->head)
+			write(1, "OK\n", 3);
+		else
+			write(1, "KO\n", 3);
+	}
+	if (ss->str)
+		free(ss->str);
 	sts_clear(ss, 0);
-	// system("leaks push_swap");
+	// system("leaks checker");
 }

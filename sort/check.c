@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:02:05 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 17:28:35 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 12:15:07 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include <string.h>
 #include <validate.h>
 
-#define P1 "ra\npb\nrra\npa\n"
+#define P1 "\nra\npb\nrra\npa\n"
 #define P2 "rra\nra\n"
 #define P3 "rrb\nrb\n"
-#define P5 "rb\npa\nrrb\npb\n"
-#define P6 "rb\npa\nrrb\n"
-#define P7 "ra\npb\nrra\n"
+#define P5 "\nrb\npa\nrrb\npb\n"
+#define P6 "\nrb\npa\nrrb\n"
+#define P7 "\nra\npb\nrra\n"
 
 static int	duplicates(t_stacks *ss)
 {
@@ -41,16 +41,16 @@ static int	duplicates(t_stacks *ss)
 
 static int	cleaner(t_stacks *ss)
 {
-	ss->str = strrep(ss->str, P1, "sa\n");
+	ss->str = strrep(ss->str, P1, "\nsa\n");
 	if (!ss->str)
 		return (0);
-	ss->str = strrep(ss->str, P5, "sb\n");
+	ss->str = strrep(ss->str, P5, "\nsb\n");
 	if (!ss->str)
 		return (0);
-	ss->str = strrep(ss->str, P6, "sb\npa\n");
+	ss->str = strrep(ss->str, P6, "\nsb\npa\n");
 	if (!ss->str)
 		return (0);
-	ss->str = strrep(ss->str, P7, "sa\npb\n");
+	ss->str = strrep(ss->str, P7, "\nsa\npb\n");
 	if (!ss->str)
 		return (0);
 	return (1);

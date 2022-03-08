@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   actions.h                                          :+:    :+:            */
+/*   get_next_line.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/07 15:03:07 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/08 10:08:32 by nmolinel      ########   odam.nl         */
+/*   Created: 2022/03/08 10:43:38 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/08 16:36:23 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ACTIONS_H
-# define ACTIONS_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <stack.h>
+# include <stdlib.h>
+# include <libft.h>
 
-void	swap_a(t_stacks *ss);
-void	swap_b(t_stacks *ss);
-void	swap_s(t_stacks *ss);
-void	push_a(t_stacks *ss);
-void	push_b(t_stacks *ss);
-void	rotate_a(t_stacks *ss);
-void	rotate_b(t_stacks *ss);
-void	rotate_r(t_stacks *ss);
-void	reverse_a(t_stacks *ss);
-void	reverse_b(t_stacks *ss);
-void	reverse_r(t_stacks *ss);
+char	*ft_free(char **buff, int fd, char *str);
+char	*get_next_line(int fd);
+char	*add_to_buff(char **buff, int fd, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:03:43 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 17:17:04 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 17:31:32 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ void	swap_b(t_stacks *ss)
 		if (!ss->str)
 			ss->err = 1;
 	}
+}
+
+void	swap_s(t_stacks *ss)
+{
+	swap_a(ss);
+	swap_b(ss);
 }

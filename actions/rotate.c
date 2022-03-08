@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:03:40 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 17:16:05 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 10:08:21 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ void	rotate_b(t_stacks *ss)
 	}
 }
 
-// handle rr
-void	rr(t_stack *stack_a, t_stack *stack_b)
+void	rotate_r(t_stacks *ss)
 {
-	rotate(stack_a);
-	rotate(stack_b);
+	rotate_a(ss);
+	rotate_b(ss);
 }

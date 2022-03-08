@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:04:18 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 18:25:47 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 18:17:59 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	if (!ss)
 		return (0);
 	// st_print(ss->a);
-	sort(ss, argc);
+	sort(ss, st_len(ss->a));
 	// st_print(ss->a);
 	sts_clear(ss, 0);
 	// system("leaks push_swap");

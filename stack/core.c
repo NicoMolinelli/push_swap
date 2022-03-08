@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:01:29 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 17:52:29 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 18:25:47 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,29 @@ static int	is_int(long n)
 	return (0);
 }
 
+static t_stack	*check_input(t_stack* s, char **argv)
+{
+	char		**extra;
+	char		**cp;
+	long		val;
+
+	extra = 0;
+	extra = ft_split(*argv, ' ');
+	if (!extra)
+		return (st_clear(s, extra));
+	cp = extra;
+	while (*extra)
+	{
+		val = ft_atoi(*extra);
+		if (!is_number(*extra) || st_index(val, s) >= 0 || !is_int(val))
+			return (st_clear(s, extra));
+		if (!st_append(create_node((int) val), s))
+			return (st_clear(s, extra));
+		extra++;
+	}
+	free_arr(cp);
+	return (s);
+}
 /*
 *	Creates the stack and fill it with all the params in argv converted to ints
 *
@@ -55,18 +78,16 @@ static int	is_int(long n)
 t_stack	*st_fill(char **argv, int items, int name)
 {
 	t_stack		*s;
-	long		val;
 
 	s = create_stack(items, name);
 	if (!s)
 		return (0);
 	while (*argv)
 	{
-		val = ft_atoi(*argv);
-		if (!is_number(*argv) || st_index(val, s) >= 0 || !is_int(val))
-			return (st_clear(s));
-		if (!st_append(create_node((int) val), s))
-			return (st_clear(s));
+		if (!is_number(*argv) || !ft_strlen(*argv))
+			return (st_clear(s, 0));
+		if (!check_input(s, argv))
+			return (0);
 		argv++;
 	}
 	set_indexes(s);
@@ -74,20 +95,23 @@ t_stack	*st_fill(char **argv, int items, int name)
 }
 
 //free all the memory allocated from the stack s
-t_stack	*st_clear(t_stack *s)
+t_stack	*st_clear(t_stack *s, char **extra)
 {
 	t_node	*i;
 	t_node	*temp;
 
-	if (!s)
-		return (0);
-	i = s->head;
-	while (i)
+	if (s)
 	{
-		temp = i;
-		i = i->next;
-		free(temp);
+		i = s->head;
+		while (i)
+		{
+			temp = i;
+			i = i->next;
+			free(temp);
+		}
+		free(s);
 	}
-	free(s);
+	if (extra)
+		free_arr(extra);
 	return (0);
 }

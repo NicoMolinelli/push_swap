@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:03:22 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 17:25:21 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 17:59:02 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_stacks
 
 t_stack		*create_stack(int items, int name);
 t_node		*create_node(int value);
-t_stack		*st_clear(t_stack *s);
+t_stack		*st_clear(t_stack *s, char **extra);
 
 t_stack		*st_fill(char **argv, int items, int name);
 t_stack		*st_append(t_node *n, t_stack *st);

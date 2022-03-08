@@ -6,7 +6,7 @@
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 15:03:36 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 15:54:39 by nmolinel      ########   odam.nl         */
+/*   Updated: 2022/03/08 10:07:37 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	reverse_b(t_stacks *ss)
 	}
 }
 
-void	rrr(t_stack *stack_a, t_stack *stack_b)
+void	reverse_r(t_stacks *ss)
 {
-	rev_rotate(stack_a);
-	rev_rotate(stack_b);
+	reverse_a(ss);
+	reverse_b(ss);
 }

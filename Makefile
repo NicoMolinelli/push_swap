@@ -6,7 +6,7 @@
 #    By: nmolinel <nmolinel@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/03/07 15:04:24 by nmolinel      #+#    #+#                  #
-#    Updated: 2022/03/07 18:25:28 by nmolinel      ########   odam.nl          #
+#    Updated: 2022/03/08 18:22:51 by nmolinel      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,14 @@ SRCS	=	validation.c \
 			sort/partition.c sort/check.c sort/util.c \
 			sort/index.c sort/median.c
 
-BSRC	=	checker_bonus/checker.c checker_bonus/op.c
+BSRC	=	checker_bonus/checker.c checker_bonus/op.c checker_bonus/get_next_line.c \
+			checker_bonus/get_next_line_utils.c
 
 H_PATH	=	includes
 
 RM		=	rm -f
+
+CHECK	=	checker
 
 all: ${NAME}
 
@@ -37,8 +40,10 @@ ${NAME}: ${LIBFT} ${SRCS} main.c
 ${LIBFT}:
 	make -C libft
 
-bonus: ${LIBFT} $(SRCS) $(BSRC)
-	$(CC) $(FLAGS) -o $@ -I ${H_PATH} $^
+$(CHECK): ${LIBFT} $(SRCS) $(BSRC)
+	$(CC) $(FLAGS) -o $(CHECK) -I ${H_PATH} $^
+
+bonus: $(CHECK)
 
 t10: ${NAME}
 	./$< `ruby -e "puts (0..9).to_a.shuffle.join(' ')"`

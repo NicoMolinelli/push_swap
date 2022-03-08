@@ -42,7 +42,7 @@ static int	split(char **arr, int arr_index, char const *s, char del)
 	return (1);
 }
 
-static void	free_arr(char **arr)
+void	free_arr(char **arr)
 {
 	int	i;
 
