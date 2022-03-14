@@ -1,41 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   validation.c                                       :+:    :+:            */
+/*   print.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/07 15:04:32 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 15:17:17 by nmolinel      ########   odam.nl         */
+/*   Created: 2022/03/07 15:01:48 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 15:01:49 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <validate.h>
+#include <stack.h>
+#include <stdio.h>
 
-static int	ft_issign(int c)
+void	st_print(t_stack* s)
 {
-	return (c == '-' || c == '+');
-}
+	t_node* i;
 
-// add in libft as upper func
-int	is_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	i = s->head;
+	while (i)
 	{
-		if (!ft_isdigit(str[i]) && !ft_issign(str[i]))
-			return (0);
-		i++;
+		printf("%d\t", i->value);
+		i = i->next;
 	}
-	return (1);
+	printf("\n");
 }
 
-t_stacks	*ft_error(void)
+void	st_rev_print(t_stack* s)
 {
-	write(2, "Error\n", 6);
-	return (0);
+	t_node* i;
+
+	i = s->tail;
+	while (i)
+	{
+		printf("%d\t", i->value);
+		i = i->prev;
+	}
+	printf("\n");
+}
+
+void	st_print_index(t_stack* s)
+{
+	t_node* i;
+
+	i = s->head;
+	while (i)
+	{
+		printf("%d\t", i->index);
+		i = i->next;
+	}
+	printf("\n");
 }

@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atoi.c                                          :+:    :+:            */
+/*   get_next_line.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/07 15:20:59 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 15:21:00 by nmolinel      ########   odam.nl         */
+/*   Created: 2022/03/08 10:43:38 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/08 16:36:23 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-long	ft_atoi(const char *str)
-{
-	long	n;
-	int		sign;
+# include <stdlib.h>
+# include <libft.h>
 
-	n = 0;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (ft_isdigit(*str))
-	{
-		n = n * 10 + (*str - '0');
-		str++;
-	}
-	return (n * sign);
-}
+char	*ft_free(char **buff, int fd, char *str);
+char	*get_next_line(int fd);
+char	*add_to_buff(char **buff, int fd, char *str);
+
+#endif

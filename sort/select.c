@@ -1,63 +1,51 @@
-#include <stack.h>
-#include <stdio.h>
-#include <ops.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   select.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/03/07 15:02:39 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:50:15 by nmolinel      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-// fast way to put the value in "index" position as first element in stack s
-void	smart_top(t_stack* s, int index)
+#include <sort.h>
+#include <actions.h>
+
+// find and return min value in stack
+int	min(t_stack *st)
 {
-	// normal rotate
-	if ((index % s->items) < s->items / 2)
+	t_node	*i;
+	int		min;
+
+	i = st->head->next;
+	min = st->head->value;
+	while (i)
 	{
-		while ((index % s->items) != (s->start % s->items))
-		{
-			rotate(s, 0);
-		}
+		if (min > i->value)
+			min = i->value;
+		i = i->next;
 	}
-	else//reverse rotate
-	{
-		while ((index % s->items) != (s->start % s->items))
-		{
-			rotate(s, 1);
-		}
-	}
+	return (min);
 }
 
-// find min value in stack and return the index
-int	min(t_stack* s)
+void	select_sort(t_stacks *ss, int length)
 {
-	int		min;
-	size_t	i;
+	int	m;
+	int	i;
 
-	i = 1;
-	min = sval(s, 0);
-	while (s->list[(s->start + i) % s->items] && i < s->items)
+	i = 0;
+	while (i < length - 2)
 	{
-		if (min > sval(s, i))
-			min = sval(s, i);
+		m = min(ss->a);
+		smart_top(ss, m);
+		push_b(ss);
 		i++;
 	}
-	return (sindex(s, min));
-}
-
-void	select_sort(t_stack* sa, t_stack* sb)
-{
-	int m;
-
-	while (sa->list[sa->start % sa->items])
+	sort_2(ss);
+	while (i--)
 	{
-		// printf("val: %d\n", sa->list[sa->start % sa->items]);
-		// printf("sa di start: %zu\n", sa->start);
-		m = min(sa);
-		// printf("min: %d\n", m);
-		smart_top(sa, m);
-		push(sb, sa);
-		// printf("stack a\n");
-		// print_stack(sa);
-		// printf("stack b\n");
-		// print_stack(sb);
-	}
-	while (sb->list[sb->start % sb->items])
-	{
-		push(sa, sb);
+		push_a(ss);
 	}
 }

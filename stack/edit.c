@@ -1,41 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   validation.c                                       :+:    :+:            */
+/*   edit.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/07 15:04:32 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 15:17:17 by nmolinel      ########   odam.nl         */
+/*   Created: 2022/03/07 15:01:12 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/07 17:54:15 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <validate.h>
+#include <stack.h>
 
-static int	ft_issign(int c)
+t_stack	*st_append(t_node *n, t_stack *st)
 {
-	return (c == '-' || c == '+');
-}
+	t_node	*tail;
 
-// add in libft as upper func
-int	is_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
+	if (!n)
 		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && !ft_issign(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
+	tail = st->tail;
+	if (!tail)
+		st->head = n;
+	else
+		tail->next = n;
+	n->prev = st->tail;
+	st->tail = n;
+	return (st);
 }
 
-t_stacks	*ft_error(void)
+t_stack	*st_prepend(t_node *n, t_stack *st)
 {
-	write(2, "Error\n", 6);
-	return (0);
+	t_node	*head;
+
+	if (!n)
+		return (0);
+	head = st->head;
+	if (!head)
+	{
+		st->head = n;
+		st->tail = n;
+	}
+	else
+		head->prev = n;
+	n->next = head;
+	st->head = n;
+	return (st);
 }

@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atoi.c                                          :+:    :+:            */
+/*   actions.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nmolinel <nmolinel@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/07 15:20:59 by nmolinel      #+#    #+#                 */
-/*   Updated: 2022/03/07 15:21:00 by nmolinel      ########   odam.nl         */
+/*   Created: 2022/03/07 15:03:07 by nmolinel      #+#    #+#                 */
+/*   Updated: 2022/03/08 10:08:32 by nmolinel      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ACTIONS_H
+# define ACTIONS_H
 
-long	ft_atoi(const char *str)
-{
-	long	n;
-	int		sign;
+# include <stack.h>
 
-	n = 0;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (ft_isdigit(*str))
-	{
-		n = n * 10 + (*str - '0');
-		str++;
-	}
-	return (n * sign);
-}
+void	swap_a(t_stacks *ss);
+void	swap_b(t_stacks *ss);
+void	swap_s(t_stacks *ss);
+void	push_a(t_stacks *ss);
+void	push_b(t_stacks *ss);
+void	rotate_a(t_stacks *ss);
+void	rotate_b(t_stacks *ss);
+void	rotate_r(t_stacks *ss);
+void	reverse_a(t_stacks *ss);
+void	reverse_b(t_stacks *ss);
+void	reverse_r(t_stacks *ss);
+
+#endif
