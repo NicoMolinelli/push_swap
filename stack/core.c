@@ -71,6 +71,7 @@ static t_stack	*check_input(t_stack* s, char **argv)
 	free_arr(cp);
 	return (s);
 }
+
 /*
 *	Creates the stack and fill it with all the params in argv converted to ints
 *

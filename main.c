@@ -20,9 +20,6 @@ int	main(int argc, char **argv)
 	ss = create_stacks(--argc, ++argv);
 	if (!ss)
 		return (0);
-	// st_print(ss->a);
 	sort(ss, st_len(ss->a));
-	// st_print(ss->a);
 	sts_clear(ss, 0);
-	// system("leaks push_swap");
 }

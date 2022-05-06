@@ -41,7 +41,7 @@ ${LIBFT}:
 	make -C libft
 
 $(CHECK): ${LIBFT} $(SRCS) $(BSRC)
-	$(CC) $(FLAGS) -o $(CHECK) -I ${H_PATH} $^
+	$(CC) $(FLAGS) -o $@ -I ${H_PATH} $^
 
 bonus: $(CHECK)
 
@@ -76,6 +76,7 @@ clean:
 fclean:
 	make $@ -C libft
 	${RM} ${NAME}
+	${RM} ${CHECK}
 
 re: fclean ${NAME}
 

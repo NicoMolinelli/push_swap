@@ -1,0 +1,10 @@
+MANDATORY
+
+-   merge with codam repo fixes
+-   make sort/check looks better
+-   Nice and descriptive README
+-   Code structure refactoring
+-   Compile with obj files + colors
+-   On error show usage manual
+-   Start implementing unified libft
+-   Improve code
